@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test MyDr Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background: #2c7a7b;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #276968;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test MyDr Widget Integration</h1>
+    
+    <div class="test-section">
+        <h2>MyDr Booking Button</h2>
+        <p>Click the button below to test the MyDr widget:</p>
+        <button
+            class="btn-mydr-pp"
+            data-doctor=""
+            data-speciality=""
+            data-visitkind="Prywatna"
+            data-evisit="true"
+            data-appname="drw"
+            data-token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmYWNpbGl0eV9pZCI6MjY5MTV9.AkNeyST-oY_lzpL9AXCtwaauKJb3AVPFiUU7BxWLH2s"
+        >
+            Umów wizytę online
+        </button>
+    </div>
+
+    <div class="test-section">
+        <h2>Console Logs</h2>
+        <p>Check browser console (F12) for any errors or logs from MyDr widget.</p>
+        <div id="logs"></div>
+    </div>
+
+    <script src="https://mydr.pl/widgets/widget.js" async></script>
+    
+    <script>
+        // Monitor script loading
+        window.addEventListener('load', function() {
+            console.log('[Test] Page loaded');
+            console.log('[Test] MyDr widget script should be loading...');
+            
+            // Check if widget initialized
+            setTimeout(function() {
+                const buttons = document.querySelectorAll('.btn-mydr-pp');
+                console.log('[Test] Found buttons with class btn-mydr-pp:', buttons.length);
+                buttons.forEach(function(btn, idx) {
+                    console.log('[Test] Button ' + idx + ' data attributes:', {
+                        token: btn.getAttribute('data-token') ? 'present' : 'missing',
+                        doctor: btn.getAttribute('data-doctor'),
+                        speciality: btn.getAttribute('data-speciality'),
+                        visitkind: btn.getAttribute('data-visitkind'),
+                        evisit: btn.getAttribute('data-evisit'),
+                        appname: btn.getAttribute('data-appname')
+                    });
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

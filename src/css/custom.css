@@ -1,0 +1,777 @@
+/**
+ * WiseHealth Custom Styles
+ * Modern, elegant design for a psychology/psychiatry clinic
+ * Inspired by premium healthcare websites with calming aesthetics
+ */
+
+/* Color palette - sophisticated medical/wellness feel */
+:root {
+  /* Primary color - deep teal/blue (trust, calm, professionalism) */
+  --ifm-color-primary: #2c7a7b;
+  --ifm-color-primary-dark: #276968;
+  --ifm-color-primary-darker: #256361;
+  --ifm-color-primary-darkest: #1e5150;
+  --ifm-color-primary-light: #319795;
+  --ifm-color-primary-lighter: #38a39f;
+  --ifm-color-primary-lightest: #4db5b0;
+  
+  /* Secondary accent - warm coral/rose (compassion, care) */
+  --ifm-color-secondary: #ed8936;
+  --ifm-color-secondary-dark: #dd6b20;
+  --ifm-color-secondary-darker: #c05621;
+  
+  /* Success - soft green (growth, positive outcomes) */
+  --ifm-color-success: #48bb78;
+  
+  /* Danger/alert - warm red for emergency notices */
+  --ifm-color-danger: #f56565;
+  
+  /* Neutral grays - sophisticated palette */
+  --ifm-color-gray-50: #f7fafc;
+  --ifm-color-gray-100: #edf2f7;
+  --ifm-color-gray-200: #e2e8f0;
+  --ifm-color-gray-300: #cbd5e0;
+  --ifm-color-gray-400: #a0aec0;
+  --ifm-color-gray-500: #718096;
+  --ifm-color-gray-600: #4a5568;
+  --ifm-color-gray-700: #2d3748;
+  --ifm-color-gray-800: #1a202c;
+  --ifm-color-gray-900: #171923;
+  
+  /* Typography - elegant and readable */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+  --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-font-weight-semibold: 600;
+  --ifm-font-weight-bold: 700;
+  --ifm-font-size-base: 17px;
+  --ifm-line-height-base: 1.75;
+  --ifm-heading-line-height: 1.3;
+  
+  /* Spacing - generous and breathing */
+  --ifm-spacing-horizontal: 1.25rem;
+  --ifm-spacing-vertical: 1.25rem;
+  --ifm-global-spacing: 2rem;
+  
+  /* Cards and elements - modern rounded corners */
+  --ifm-card-border-radius: 1rem;
+  --ifm-button-border-radius: 0.625rem;
+  --ifm-global-radius: 0.75rem;
+  
+  /* Shadows - subtle depth */
+  --ifm-global-shadow-lw: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ifm-global-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --ifm-global-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --ifm-global-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Navbar */
+  --ifm-navbar-height: 4.5rem;
+  --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.98);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+  
+  /* Code */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode - softer, more elegant palette */
+[data-theme='dark'] {
+  --ifm-color-primary: #4fd1c5;
+  --ifm-color-primary-dark: #3ac7ba;
+  --ifm-color-primary-darker: #35bcb0;
+  --ifm-color-primary-darkest: #2c9d93;
+  --ifm-color-primary-light: #64dbd0;
+  --ifm-color-primary-lighter: #6fe0d5;
+  --ifm-color-primary-lightest: #8eeae1;
+  --ifm-navbar-background-color: rgba(26, 32, 44, 0.98);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-background-color: #171923;
+  --ifm-card-background-color: #1a202c;
+}
+
+/* Global styles - premium feel */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background: linear-gradient(180deg, #f7fafc 0%, #ffffff 100%);
+}
+
+[data-theme='dark'] body {
+  background: linear-gradient(180deg, #1a202c 0%, #171923 100%);
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ifm-color-gray-900);
+}
+
+[data-theme='dark'] h1,
+[data-theme='dark'] h2,
+[data-theme='dark'] h3,
+[data-theme='dark'] h4,
+[data-theme='dark'] h5,
+[data-theme='dark'] h6 {
+  color: var(--ifm-color-gray-50);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-top: 2rem;
+  margin-bottom: 1.25rem;
+  color: var(--ifm-color-primary);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+p {
+  line-height: 1.7;
+  color: var(--ifm-color-gray-700);
+  font-size: 1.0625rem;
+}
+
+[data-theme='dark'] p {
+  color: var(--ifm-color-gray-300);
+}
+
+/* Links - smooth interactions */
+a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: var(--ifm-color-primary);
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--ifm-color-primary-dark);
+}
+
+/* Hero Section - Premium Medical Aesthetic */
+.hero {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, rgba(44, 122, 123, 0.03) 0%, rgba(237, 137, 54, 0.03) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(44, 122, 123, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--ifm-color-gray-900) 0%, var(--ifm-color-primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='dark'] .hero__title {
+  background: linear-gradient(135deg, var(--ifm-color-gray-50) 0%, var(--ifm-color-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero__subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  opacity: 0.85;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: var(--ifm-color-gray-700);
+}
+
+[data-theme='dark'] .hero__subtitle {
+  color: var(--ifm-color-gray-300);
+}
+
+/* Cards - Modern Medical Design */
+.card {
+  background: var(--ifm-card-background-color, white);
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--ifm-color-gray-200);
+  padding: 1.5rem;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+[data-theme='dark'] .card {
+  border-color: var(--ifm-color-gray-800);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--ifm-color-secondary) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  box-shadow: var(--ifm-global-shadow-lg);
+  transform: translateY(-6px);
+  border-color: var(--ifm-color-primary-light);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card--danger {
+  border-left: 4px solid var(--ifm-color-danger);
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.03) 0%, rgba(255, 107, 107, 0.01) 100%);
+}
+
+[data-theme='dark'] .card--danger {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 107, 107, 0.05) 100%);
+}
+
+/* Buttons - Premium Medical Style */
+.button {
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.button--primary {
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  border: none;
+  color: white;
+}
+
+.button--primary:hover {
+  background: linear-gradient(135deg, var(--ifm-color-primary-dark) 0%, var(--ifm-color-primary-darkest) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--ifm-global-shadow-lg), 0 8px 24px rgba(44, 122, 123, 0.25);
+  color: white;
+}
+
+.button--secondary {
+  background: linear-gradient(135deg, var(--ifm-color-secondary) 0%, #dd7728 100%);
+  border: none;
+  color: white;
+}
+
+.button--secondary:hover {
+  background: linear-gradient(135deg, #dd7728 0%, #c96920 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--ifm-global-shadow-lg), 0 8px 24px rgba(237, 137, 54, 0.25);
+  color: white;
+}
+
+.button--outline {
+  background: transparent;
+  border: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.button--outline:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.button--lg {
+  font-size: 1.25rem;
+  padding: 1rem 2.5rem;
+  border-radius: 1rem;
+}
+
+/* Navbar booking button */
+.navbar-booking-button {
+  background: linear-gradient(135deg, var(--ifm-color-secondary) 0%, #dd7728 100%);
+  color: white !important;
+  font-weight: 600;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--ifm-global-shadow-md);
+  border: none;
+}
+
+.navbar-booking-button:hover {
+  background: linear-gradient(135deg, #dd7728 0%, #c96920 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--ifm-global-shadow-lg), 0 6px 20px rgba(237, 137, 54, 0.3);
+  color: white !important;
+}
+
+/* Tables - Modern Medical Design */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  border-radius: var(--ifm-card-border-radius);
+  overflow: hidden;
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+.table th {
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  color: white;
+  font-weight: 700;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--ifm-color-gray-200);
+  background: white;
+  transition: background 0.2s ease;
+}
+
+[data-theme='dark'] .table td {
+  background: var(--ifm-card-background-color);
+  border-bottom-color: var(--ifm-color-gray-800);
+}
+
+.table tbody tr:hover td {
+  background: var(--ifm-color-primary-lightest);
+}
+
+[data-theme='dark'] .table tbody tr:hover td {
+  background: rgba(44, 122, 123, 0.1);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Step numbers (for "How it works" section) - Premium Style */
+.step-number {
+  font-size: 4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-family: var(--ifm-font-family-base);
+  letter-spacing: -0.05em;
+}
+
+/* Emergency notice styling - High visibility */
+.emergency-notice {
+  color: var(--ifm-color-danger);
+  font-weight: 700;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, rgba(255, 107, 107, 0.04) 100%);
+  border-left: 5px solid var(--ifm-color-danger);
+  border-radius: var(--ifm-card-border-radius);
+  margin: 1.5rem 0;
+  box-shadow: var(--ifm-global-shadow-md);
+  position: relative;
+}
+
+.emergency-notice::before {
+  content: '⚠️';
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Footer - Premium Medical Design */
+.footer {
+  background: linear-gradient(135deg, var(--ifm-color-gray-900) 0%, #1a2332 100%);
+  color: var(--ifm-color-gray-100);
+  padding: 4rem 0 2rem;
+  border-top: 3px solid var(--ifm-color-primary);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--ifm-color-primary) 50%, transparent 100%);
+}
+
+.footer__title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+  color: var(--ifm-color-gray-50);
+}
+
+.footer__item {
+  line-height: 2;
+  transition: all 0.2s ease;
+}
+
+.footer__link-item {
+  color: var(--ifm-color-gray-300);
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-light);
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+.footer__bottom {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ifm-color-gray-800);
+  text-align: center;
+  color: var(--ifm-color-gray-400);
+  font-size: 0.875rem;
+}
+
+/* Navbar - Premium Glass Effect */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid var(--ifm-color-gray-200);
+  box-shadow: var(--ifm-global-shadow-md);
+  padding: 0.75rem 0;
+  transition: all 0.3s ease;
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(26, 32, 44, 0.95);
+  border-bottom-color: var(--ifm-color-gray-800);
+}
+
+.navbar__title {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar__link {
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--ifm-color-primary) !important;
+  background: linear-gradient(135deg, rgba(44, 122, 123, 0.08) 0%, rgba(237, 137, 54, 0.08) 100%);
+}
+
+.navbar-sidebar {
+  background: var(--ifm-navbar-background-color);
+}
+
+/* Navbar logo - better visibility */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo img {
+  max-height: 50px;
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar__brand {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+/* MyDr Widget Button - ensure proper styling */
+.btn-mydr-pp {
+  cursor: pointer !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 0;
+  }
+  
+  .hero__title {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+  
+  .hero__subtitle {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+  
+  .navbar__title {
+    font-size: 1.25rem;
+  }
+  
+  .card {
+    padding: 1.25rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2.5rem 0;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+  
+  .button--lg {
+    font-size: 1rem;
+    padding: 0.875rem 1.75rem;
+  }
+  
+  .step-number {
+    font-size: 3rem;
+  }
+  
+  .footer {
+    padding: 2.5rem 0 1.5rem;
+  }
+  
+  .navbar {
+    padding: 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1rem;
+  }
+  
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .table {
+    font-size: 0.875rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+}
+
+/* Accessibility improvements */
+.button:focus,
+a:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* List styling - Better readability */
+ul, ol {
+  line-height: 1.8;
+  color: var(--ifm-color-gray-700);
+}
+
+[data-theme='dark'] ul,
+[data-theme='dark'] ol {
+  color: var(--ifm-color-gray-300);
+}
+
+li {
+  margin-bottom: 0.75rem;
+}
+
+/* Text utilities */
+.text--bold {
+  font-weight: 700;
+}
+
+.text--secondary {
+  color: var(--ifm-color-gray-600);
+  font-size: 0.9375rem;
+}
+
+[data-theme='dark'] .text--secondary {
+  color: var(--ifm-color-gray-400);
+}
+
+.text--danger {
+  color: var(--ifm-color-danger);
+  font-weight: 600;
+}
+
+/* Container enhancements */
+.container {
+  max-width: 1200px;
+}
+
+/* Section spacing */
+section {
+  padding: 4rem 0;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 2.5rem 0;
+  }
+}
+
+/* Image enhancements */
+img {
+  border-radius: var(--ifm-card-border-radius);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Badge/Tag styling */
+.badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-dark);
+  margin: 0.25rem;
+}
+
+/* Divider styling */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--ifm-color-gray-300) 50%, transparent 100%);
+  margin: 3rem 0;
+}
+
+[data-theme='dark'] hr {
+  background: linear-gradient(90deg, transparent 0%, var(--ifm-color-gray-700) 50%, transparent 100%);
+}
+
+/* Service card background images */
+.service-card-with-bg .service-card-bg {
+  opacity: 0.3;
+  filter: brightness(1.1) contrast(0.95);
+}
+
+[data-theme='dark'] .service-card-with-bg .service-card-bg {
+  opacity: 0.5;
+  filter: brightness(1.5) contrast(1.1) saturate(0.9);
+}
+
+.service-card-with-bg .card__body {
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.7) 40%,
+    var(--ifm-card-background-color) 70%
+  );
+  padding-top: 160px;
+  min-height: 300px;
+}
+
+[data-theme='dark'] .service-card-with-bg .card__body {
+  background: linear-gradient(to bottom, 
+    rgba(26, 32, 44, 0) 0%, 
+    rgba(26, 32, 44, 0.6) 40%,
+    rgba(26, 32, 44, 0.95) 70%
+  );
+}

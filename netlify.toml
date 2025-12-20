@@ -1,0 +1,60 @@
+# Netlify Configuration for WiseHealth
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Directory with build output
+  publish = "build"
+  
+  # Node version
+  environment = { NODE_VERSION = "20" }
+
+# Environment variables (set these in Netlify UI for security)
+# Required:
+# - MYDR_BOOKING_URL: URL for MyDr booking system
+# Optional (for future API integration):
+# - MYDR_API_KEY: API key for MyDr integration
+# - MYDR_API_BASE_URL: Base URL for MyDr API
+
+# Redirects and rewrites
+[[redirects]]
+  # Redirect old WordPress URLs if needed (examples)
+  from = "/uslugi"
+  to = "/oferta"
+  status = 301
+
+[[redirects]]
+  # Catch-all redirect for SPA (if needed)
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (adjust as needed)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mydr.pl; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://mydr.pl;"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    # Cache static assets for 1 year
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Plugin configuration (optional - for Netlify plugins)
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
+#   [plugins.inputs]
+#     output_path = "reports/lighthouse.html"
+
+# Build plugins can be added via Netlify UI as well

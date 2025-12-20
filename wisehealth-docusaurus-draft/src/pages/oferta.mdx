@@ -1,0 +1,94 @@
+---
+title: Oferta
+description: Oferta usług psychiatrycznych i psychologicznych – WiseHealth Kraków
+draft: true
+---
+
+import Layout from '@theme/Layout';
+import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+
+export default function OfertaPage() {
+  return (
+    <Layout
+      title="Oferta"
+      description="Oferta usług psychiatrycznych i psychologicznych WiseHealth w Krakowie.">
+      <main className="container margin-vert--lg">
+        <h1>Oferta</h1>
+        <p>
+          Poniżej znajdziesz przykładowe kategorie wizyt i konsultacji dostępnych w WiseHealth.
+          Traktuj to jako punkt wyjścia – zakres usług może się zmieniać w zależności od
+          dostępności specjalistów. Przed pierwszą wizytą zawsze warto sprawdzić aktualne informacje
+          w kalendarzu online MyDr.
+        </p>
+
+        <section className="margin-top--lg">
+          <h2>Konsultacje psychiatryczne</h2>
+          <h3>Pierwsza konsultacja psychiatryczna</h3>
+          <p>
+            Rozszerzona wizyta, podczas której omawiamy Twoje obecne trudności, historię zdrowia
+            psychicznego, dotychczasowe leczenie oraz sytuację życiową. Na tej podstawie lekarz
+            proponuje dalsze kroki – może to być obserwacja, leczenie farmakologiczne, skierowanie
+            na psychoterapię, badania dodatkowe lub inna forma wsparcia.
+          </p>
+          <h3>Wizyta kontrolna u psychiatry</h3>
+          <p>
+            Krótsza wizyta służąca monitorowaniu samopoczucia, ocenę skuteczności leczenia,
+            omówieniu działań niepożądanych oraz ewentualnym modyfikacjom terapii.
+          </p>
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Konsultacje psychologiczne i psychoterapeutyczne</h2>
+          <h3>Pierwsza konsultacja psychologiczna</h3>
+          <p>
+            Spotkanie wstępne, którego celem jest zrozumienie Twojej sytuacji, oczekiwań oraz
+            tego, czy dana forma terapii będzie dla Ciebie odpowiednia. Wspólnie ustalacie cele
+            i możliwy sposób pracy.
+          </p>
+          <h3>Sesje psychoterapeutyczne</h3>
+          <p>
+            Regularne spotkania (najczęściej 50–60 minut), ukierunkowane na pracę nad konkretnymi
+            obszarami: nastrojem, lękiem, relacjami, stresem, poczuciem własnej wartości lub innymi
+            trudnościami, które wpływają na Twoje życie.
+          </p>
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Teleporady / konsultacje online</h2>
+          <p>
+            W wielu sytuacjach istnieje możliwość odbycia wizyty online (w formie teleporady lub
+            wideokonsultacji). To rozwiązanie szczególnie wygodne, jeśli mieszkasz poza Krakowem,
+            masz ograniczoną mobilność lub po prostu czujesz się bezpieczniej w znanym otoczeniu.
+          </p>
+          <p>
+            Ze względów bezpieczeństwa i obowiązujących przepisów nie każdą sytuację da się w pełni
+            zaopiekować zdalnie. Ostateczną decyzję co do formy wizyty podejmuje lekarz/terapeuta.
+          </p>
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Współpraca długoterminowa</h2>
+          <p>
+            W przypadku przewlekłych trudności (np. zaburzeń nastroju, zaburzeń lękowych)
+            optymalne wsparcie często wymaga połączenia konsultacji psychiatrycznych, psychoterapii
+            oraz regularnego monitorowania stanu zdrowia. W WiseHealth staramy się, aby plan
+            leczenia był dla Ciebie zrozumiały i możliwy do realizacji.
+          </p>
+        </section>
+
+        <section className="margin-top--lg margin-bottom--xl">
+          <div className="card">
+            <div className="card__body">
+              <h2>Umów wizytę online</h2>
+              <p>
+                Jeśli chcesz umówić pierwszą konsultację lub kontynuację leczenia, skorzystaj z
+                rejestracji online w systemie MyDr. Wybierzesz specjalistę, termin i formę wizyty.
+              </p>
+              <MyDrBookingButton className="margin-top--md" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+}

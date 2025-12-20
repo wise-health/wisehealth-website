@@ -1,0 +1,73 @@
+---
+title: Kontakt
+description: Kontakt do WiseHealth – psychiatria i psychologia Kraków
+draft: true
+---
+
+import Layout from '@theme/Layout';
+import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+
+export default function KontaktPage() {
+  return (
+    <Layout
+      title="Kontakt"
+      description="Dane kontaktowe WiseHealth w Krakowie.">
+      <main className="container margin-vert--lg">
+        <h1>Kontakt</h1>
+
+        <section className="margin-top--lg">
+          <h2>Dane kontaktowe</h2>
+          <p>
+            <strong>Nazwa placówki:</strong> WiseHealth – klinika zdrowia psychicznego
+            <br />
+            <strong>Adres gabinetu:</strong> [tu wprowadź adres w Krakowie]
+            <br />
+            <strong>Telefon:</strong> [tu wprowadź numer telefonu]
+            <br />
+            <strong>E-mail:</strong> [tu wprowadź adres mailowy]
+          </p>
+          <p style={{ fontSize: '0.9rem' }}>
+            Godziny pracy mogą się różnić w zależności od grafiku poszczególnych specjalistów.
+            Aktualne dostępne terminy znajdziesz w kalendarzu rejestracji online.
+          </p>
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Umów wizytę online</h2>
+          <p>
+            Najszybszym sposobem umówienia wizyty jest skorzystanie z systemu rejestracji online
+            MyDr. W kilka minut wybierzesz specjalistę, termin i formę konsultacji.
+          </p>
+          <MyDrBookingButton className="margin-bottom--lg" />
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Jak do nas trafić</h2>
+          <p>
+            Tutaj możesz umieścić opis dojazdu komunikacją miejską, informacje o miejscach
+            parkingowych oraz inne praktyczne wskazówki dla pacjentów.
+          </p>
+
+          {/* TODO: Wstaw mapę Google Maps lub inną mapę po ustaleniu dokładnego adresu. */}
+          <div className="margin-top--md">
+            <em>Mapa dojazdu – do uzupełnienia.</em>
+          </div>
+        </section>
+
+        <section className="margin-top--lg margin-bottom--xl">
+          <h2>Ważne informacje</h2>
+          <ul>
+            <li>
+              W sytuacji nagłego zagrożenia życia lub zdrowia zgłoś się na Szpitalny Oddział
+              Ratunkowy lub zadzwoń pod numer alarmowy <strong>112</strong>.
+            </li>
+            <li>
+              E-mail i formularz kontaktowy nie służą do zgłaszania pilnych stanów zagrożenia
+              życia.
+            </li>
+          </ul>
+        </section>
+      </main>
+    </Layout>
+  );
+}

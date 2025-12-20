@@ -1,0 +1,123 @@
+---
+title: Strona główna
+description: Psychiatria i psychologia w Krakowie – WiseHealth
+draft: true
+---
+
+import Layout from '@theme/Layout';
+import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+
+export default function HomePage() {
+  return (
+    <Layout
+      title="WiseHealth – psychiatria i psychologia w Krakowie"
+      description="WiseHealth – prywatna klinika zdrowia psychicznego w Krakowie. Psychiatria, psychologia, terapia i konsultacje online.">
+      <main className="container margin-vert--lg">
+        <section className="hero hero--primary" style={{ borderRadius: '1rem', padding: '2rem' }}>
+          <div className="row">
+            <div className="col col--7">
+              <h1>WiseHealth – klinika zdrowia psychicznego w Krakowie</h1>
+              <p>
+                Prywatna opieka psychiatryczna i psychologiczna dla dorosłych. Pomagamy w
+                zaburzeniach nastroju, lęku, bezsenności, wypaleniu, kryzysach życiowych i wielu
+                innych trudnościach.
+              </p>
+              <p>
+                Oferujemy konsultacje stacjonarne w Krakowie oraz wygodne teleporady online – bez
+                kolejek, w spokojnej atmosferze.
+              </p>
+              <MyDrBookingButton className="margin-top--md" />
+              <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                Rejestracja i prowadzenie dokumentacji odbywa się w bezpiecznym systemie MyDr.
+              </p>
+            </div>
+            <div className="col col--5">
+              <div className="card">
+                <div className="card__body">
+                  <h2>Jak wygląda pierwsza wizyta?</h2>
+                  <ol>
+                    <li>Rezerwujesz termin online przez przycisk „Umów wizytę”.</li>
+                    <li>Otrzymujesz potwierdzenie terminu oraz instrukcję przygotowania.</li>
+                    <li>Podczas wizyty omawiasz swoje trudności i otrzymujesz wstępny plan dalszych kroków.</li>
+                  </ol>
+                  <p style={{ fontSize: '0.9rem' }}>
+                    W sytuacji nagłego zagrożenia życia lub zdrowia zawsze zgłoś się na SOR lub zadzwoń pod numer alarmowy 112.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="margin-top--xl">
+          <h2>W czym pomagamy</h2>
+          <div className="row margin-top--md">
+            <div className="col col--4">
+              <h3>Zaburzenia nastroju</h3>
+              <p>Obniżony nastrój, depresja, chwiejność emocjonalna, utrata energii i motywacji.</p>
+            </div>
+            <div className="col col--4">
+              <h3>Zaburzenia lękowe</h3>
+              <p>Lęk uogólniony, napady paniki, fobie, napięcie, trudności z zasypianiem.</p>
+            </div>
+            <div className="col col--4">
+              <h3>Stres i wypalenie</h3>
+              <p>Przeciążenie pracą, wypalenie zawodowe, kryzysy życiowe, żałoba, rozstanie.</p>
+            </div>
+          </div>
+          <div className="row margin-top--md">
+            <div className="col col--4">
+              <h3>Trudności w relacjach</h3>
+              <p>Konflikty w związku, poczucie osamotnienia, problemy komunikacyjne.</p>
+            </div>
+            <div className="col col--4">
+              <h3>Problemy ze snem</h3>
+              <p>Bezsenność, wybudzanie się, niepokojące sny, zaburzony rytm snu i czuwania.</p>
+            </div>
+            <div className="col col--4">
+              <h3>Wsparcie po hospitalizacji</h3>
+              <p>
+                Kontynuacja leczenia po pobycie w szpitalu psychiatrycznym lub oddziale dziennym.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="margin-top--xl">
+          <h2>Dlaczego WiseHealth</h2>
+          <div className="row margin-top--md">
+            <div className="col col--6">
+              <ul>
+                <li>Skupienie na komforcie i bezpieczeństwie pacjenta.</li>
+                <li>Indywidualne podejście – wspólnie planujemy dalsze kroki.</li>
+                <li>Możliwość łączenia konsultacji stacjonarnych i online.</li>
+                <li>Przejrzysta komunikacja – jasno omawiamy możliwe opcje i ograniczenia.</li>
+              </ul>
+            </div>
+            <div className="col col--6">
+              <ul>
+                <li>Nowoczesny system EDM MyDr do obsługi wizyt i dokumentacji.</li>
+                <li>Przyjazna, nieoceniająca atmosfera.</li>
+                <li>Elastyczne formy kontaktu – wizyty, teleporady, e-recepty (zgodnie z przepisami).</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="margin-top--xl margin-bottom--xl">
+          <div className="card">
+            <div className="card__body">
+              <h2>Gotowy, aby zrobić pierwszy krok?</h2>
+              <p>
+                Jeśli rozważasz konsultację, możesz umówić pierwszą wizytę online. Nie musisz być
+                „na 100% pewny”, że potrzebujesz leczenia – pierwsze spotkanie służy właśnie
+                spokojnemu omówieniu sytuacji.
+              </p>
+              <MyDrBookingButton className="margin-top--md" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+}

@@ -1,0 +1,92 @@
+---
+title: FAQ
+description: Najczęściej zadawane pytania – WiseHealth Kraków
+draft: true
+---
+
+import Layout from '@theme/Layout';
+import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+
+export default function FAQPage() {
+  return (
+    <Layout
+      title="Najczęściej zadawane pytania"
+      description="FAQ WiseHealth – pytania i odpowiedzi.">
+      <main className="container margin-vert--lg">
+        <h1>Najczęściej zadawane pytania</h1>
+
+        <section className="margin-top--lg">
+          <h2>Rejestracja i wizyty</h2>
+
+          <h3>Jak mogę umówić wizytę?</h3>
+          <p>
+            Wizytę możesz umówić online, korzystając z systemu MyDr. Wybierasz specjalistę, rodzaj
+            wizyty oraz odpowiadający Ci termin.
+          </p>
+          <MyDrBookingButton className="margin-bottom--lg" />
+
+          <h3>Czy mogę odwołać lub przełożyć wizytę?</h3>
+          <p>
+            Możliwość odwołania lub przełożenia wizyty oraz zasady (np. minimalny czas przed
+            wizytą) określa regulamin kliniki. Szczegółowe informacje znajdziesz w potwierdzeniu
+            rezerwacji lub w regulaminie korzystania z usług.
+          </p>
+
+          <h3>Czy przyjmujecie pacjentów niepełnoletnich?</h3>
+          <p>
+            Zakres wiekowy pacjentów zależy od specjalistów współpracujących z kliniką. Przed
+            umówieniem wizyty sprawdź informacje przy wybranym lekarzu/terapeucie w systemie MyDr
+            lub skontaktuj się telefonicznie/mailowo, aby dopytać o aktualne możliwości.
+          </p>
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Teleporady i konsultacje online</h2>
+
+          <h3>Czy mogę skorzystać z wizyty online?</h3>
+          <p>
+            W wielu sytuacjach jest to możliwe, szczególnie jeśli chodzi o kontynuację leczenia czy
+            omówienie bieżących trudności. Ostateczna decyzja należy jednak do lekarza/terapeuty,
+            który oceni, czy w danym przypadku konsultacja online będzie wystarczająca i bezpieczna.
+          </p>
+
+          <h3>Czy w trakcie teleporady mogę otrzymać e-receptę lub e-zwolnienie?</h3>
+          <p>
+            Wystawienie e-recepty lub e-zwolnienia jest możliwe, jeśli lekarz uzna to za zasadne i
+            zgodne z obowiązującymi przepisami. Sam fakt odbycia teleporady nie gwarantuje
+            automatycznie wystawienia recepty czy zwolnienia.
+          </p>
+        </section>
+
+        <section className="margin-top--lg">
+          <h2>Bezpieczeństwo i sytuacje nagłe</h2>
+
+          <h3>Co zrobić w sytuacji nagłego zagrożenia życia lub zdrowia?</h3>
+          <p>
+            W przypadku nasilonych myśli samobójczych, poczucia bezpośredniego zagrożenia życia lub
+            zdrowia, gwałtownego pogorszenia stanu psychicznego lub innych nagłych objawów
+            wymagających pilnej pomocy – nie czekaj na wizytę w poradni.
+          </p>
+          <p>
+            Zgłoś się bezpośrednio na najbliższy Szpitalny Oddział Ratunkowy lub zadzwoń pod numer
+            alarmowy <strong>112</strong>.
+          </p>
+
+          <h3>Czy e-mail lub formularz kontaktowy mogą służyć do zgłaszania nagłych sytuacji?</h3>
+          <p>
+            Nie. E-mail oraz formularz kontaktowy nie służą do udzielania pilnej pomocy medycznej.
+            W sytuacji nagłej skorzystaj z numeru alarmowego 112 lub zgłoś się na SOR.
+          </p>
+        </section>
+
+        <section className="margin-top--lg margin-bottom--xl">
+          <h2>Masz inne pytanie?</h2>
+          <p>
+            Jeśli nie znalazłeś odpowiedzi na swoje pytanie, możesz skontaktować się z nami
+            telefonicznie lub mailowo. Dane kontaktowe znajdziesz na stronie „Kontakt”.
+          </p>
+        </section>
+      </main>
+    </Layout>
+  );
+}

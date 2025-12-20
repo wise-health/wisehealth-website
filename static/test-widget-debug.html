@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDr Widget Debug Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background: #2c7a7b;
+            color: white;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #276968;
+        }
+        #console {
+            background: #1a1a1a;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>🔬 MyDr Widget Integration Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Script Loading Status</h2>
+        <div id="script-status" class="status info">Checking...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Button Test (Official MyDr Format)</h2>
+        <button
+            class="btn-mydr-pp"
+            data-doctor=""
+            data-speciality=""
+            data-visitkind="Prywatna"
+            data-evisit="true"
+            data-appname="drw"
+            data-token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmYWNpbGl0eV9pZCI6MjY5MTV9.AkNeyST-oY_lzpL9AXCtwaauKJb3AVPFiUU7BxWLH2s"
+            onclick="logClick('Official Button Clicked')"
+        >
+            🗓️ Umów wizytę online (Official Format)
+        </button>
+        
+        <button onclick="checkWidgetState()">
+            🔍 Check Widget State
+        </button>
+        
+        <button onclick="manualTrigger()">
+            ⚙️ Manual Trigger
+        </button>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Console Output</h2>
+        <div id="console"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Button Attributes</h2>
+        <pre id="button-attrs"></pre>
+    </div>
+
+    <script>
+        // Console logger
+        const consoleDiv = document.getElementById('console');
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#f00' : type === 'success' ? '#0f0' : '#0ff';
+            consoleDiv.innerHTML += `<span style="color: ${color}">[${timestamp}] ${message}</span>\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function logClick(msg) {
+            log('🖱️ ' + msg, 'info');
+        }
+
+        function checkWidgetState() {
+            log('=== WIDGET STATE CHECK ===', 'info');
+            
+            // Check if widget script loaded
+            const script = document.querySelector('script[src*="widget.js"]');
+            log('Widget script in DOM: ' + (script ? 'YES' : 'NO'), script ? 'success' : 'error');
+            
+            // Check global window object for MyDr-related properties
+            const mydrKeys = Object.keys(window).filter(k => 
+                k.toLowerCase().includes('mydr') || 
+                k.toLowerCase().includes('widget') ||
+                k.toLowerCase().includes('booking')
+            );
+            log('MyDr-related window keys: ' + (mydrKeys.length > 0 ? mydrKeys.join(', ') : 'NONE'), mydrKeys.length > 0 ? 'success' : 'error');
+            
+            // Check button
+            const btn = document.querySelector('.btn-mydr-pp');
+            if (btn) {
+                log('Button found: YES', 'success');
+                log('  - class: ' + btn.className);
+                log('  - data-token: ' + (btn.getAttribute('data-token') ? 'present ('+btn.getAttribute('data-token').substring(0,20)+'...)' : 'MISSING'));
+                log('  - data-appname: ' + btn.getAttribute('data-appname'));
+                log('  - data-evisit: ' + btn.getAttribute('data-evisit'));
+                
+                // Check if button has click event listeners
+                const listeners = getEventListeners ? getEventListeners(btn) : 'DevTools required';
+                log('  - Event listeners: ' + (typeof listeners === 'object' ? JSON.stringify(Object.keys(listeners)) : 'Cannot check'));
+            } else {
+                log('Button NOT FOUND', 'error');
+            }
+            
+            log('=========================', 'info');
+        }
+
+        function manualTrigger() {
+            log('Attempting manual trigger...', 'info');
+            const btn = document.querySelector('.btn-mydr-pp');
+            if (btn) {
+                log('Dispatching click event...', 'info');
+                btn.click();
+                setTimeout(() => {
+                    log('If no modal appeared, the widget is NOT working', 'error');
+                }, 1000);
+            }
+        }
+
+        // Initial checks
+        window.addEventListener('load', function() {
+            log('✅ Page loaded', 'success');
+            
+            setTimeout(() => {
+                // Check script
+                const script = document.querySelector('script[src*="widget.js"]');
+                const scriptStatus = document.getElementById('script-status');
+                
+                if (script) {
+                    scriptStatus.className = 'status success';
+                    scriptStatus.textContent = '✅ MyDr widget script found in DOM';
+                    log('Widget script element found', 'success');
+                } else {
+                    scriptStatus.className = 'status error';
+                    scriptStatus.textContent = '❌ MyDr widget script NOT found';
+                    log('Widget script NOT found - This is the problem!', 'error');
+                }
+                
+                // Display button attributes
+                const btn = document.querySelector('.btn-mydr-pp');
+                if (btn) {
+                    const attrs = {};
+                    for (let attr of btn.attributes) {
+                        attrs[attr.name] = attr.value;
+                    }
+                    document.getElementById('button-attrs').textContent = JSON.stringify(attrs, null, 2);
+                }
+                
+                checkWidgetState();
+                
+                log('\n💡 INSTRUCTIONS:', 'info');
+                log('1. Click the booking button and see if a modal opens', 'info');
+                log('2. Click "Check Widget State" to see diagnostics', 'info');
+                log('3. Check browser DevTools console (F12) for errors', 'info');
+                log('4. If nothing happens, the widget script may be blocked or not loading\n', 'info');
+            }, 2000);
+        });
+
+        // Monitor script loading
+        log('🔄 Loading MyDr widget script...', 'info');
+    </script>
+    
+    <script src="https://mydr.pl/widgets/widget.js" 
+            onload="log('✅ Widget script onload fired', 'success')" 
+            onerror="log('❌ Widget script failed to load', 'error')"></script>
+</body>
+</html>
