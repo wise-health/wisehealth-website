@@ -61,10 +61,9 @@ export default function ZespolPage(): React.ReactNode {
       title="Zespół"
       description="Poznaj zespół specjalistów WiseHealth.">
       <main className="container margin-vert--lg">
-        <Heading as="h1">Zespół</Heading>
+        <Heading as="h1">Założyciele</Heading>
         <p className="margin-bottom--lg">
-          WiseHealth tworzą specjaliści pracujący z szacunkiem i uważnością na potrzeby pacjentów.
-          Poniższe opisy są przykładowe – uzupełnij je o rzeczywiste informacje o członkach zespołu.
+          WiseHealth został założony przez dwoje specjalistów, którzy łączą medyczne i psychologiczne podejście do zdrowia psychicznego.
         </p>
 
         <section className="margin-top--lg">
@@ -72,7 +71,7 @@ export default function ZespolPage(): React.ReactNode {
             <div className="col col--6">
               <TeamMemberCard
                 name="Agnieszka Krawczyk"
-                title="lek. med., specjalista psychiatra"
+                title="Współzałożycielka, lek. med., specjalista psychiatra"
                 photo="/img/agnieszka-krawczyk.jpg"
                 description="Zajmuje się diagnozowaniem i leczeniem zaburzeń nastroju, zaburzeń lękowych oraz innych trudności natury psychicznej u osób dorosłych. W pracy stawia na spokojne tłumaczenie możliwych opcji leczenia i wspólne podejmowanie decyzji z pacjentem."
                 tags={[
@@ -86,7 +85,7 @@ export default function ZespolPage(): React.ReactNode {
             <div className="col col--6">
               <TeamMemberCard
                 name="Marcin Pawlus"
-                title="mgr psychologii, psychoterapeuta"
+                title="Współzałożyciel, mgr psychologii, psychoterapeuta"
                 photo="/img/marcin_pawlus_img.jpg"
                 description="Prowadzi konsultacje psychologiczne oraz psychoterapię indywidualną osób dorosłych. Pracuje z osobami w kryzysach życiowych, doświadczającymi lęku, obniżonego nastroju oraz trudności w relacjach."
                 tags={[
