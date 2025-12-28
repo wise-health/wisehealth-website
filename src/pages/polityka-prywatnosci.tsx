@@ -24,8 +24,9 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
               </p>
               <p>
                 Administratorem danych osobowych jest:<br />
-                <strong>WiseHealth – klinika zdrowia psychicznego</strong><br />
-                Adres: [do uzupełnienia]<br />
+                <strong>CEREDUO SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ</strong><br />
+                Adres: Dajwór 14 / 19, 31-052 Kraków, Polska<br />
+                KRS: 0001042565; NIP:6762645282<br />
                 E-mail: <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a>
               </p>
             </div>
@@ -200,7 +201,6 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
               </p>
               <p>
                 <strong>E-mail:</strong> <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a><br />
-                <strong>Telefon:</strong> <a href="tel:+48123456789">+48 123 456 789</a>
               </p>
             </div>
           </div>

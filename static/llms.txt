@@ -1,0 +1,30 @@
+# WiseHealth – Klinika Zdrowia Psychicznego Kraków
+
+## Opis
+WiseHealth to prywatna klinika w Krakowie oferująca kompleksową opiekę psychiatryczną i psychologiczną. Łączymy podejście medyczne z psychoterapeutycznym.
+
+## Usługi
+- Konsultacje psychiatryczne (diagnoza, farmakoterapia)
+- Psychoterapia indywidualna
+- Konsultacje psychologiczne
+- Wsparcie w kryzysach życiowych, depresji, lękach, wypaleniu zawodowym
+
+## Zespół (Założyciele)
+- **Agnieszka Krawczyk**: Lekarz medycyny, specjalista psychiatra. Diagnoza i leczenie zaburzeń nastroju i lękowych u dorosłych.
+- **Marcin Pawlus**: Psycholog, psychoterapeuta. Terapia indywidualna, praca z kryzysami i relacjami.
+
+## Cennik (Orientacyjny)
+- Pierwsza wizyta psychiatryczna: 250 zł (45 min)
+- Wizyta psychiatryczna kolejna: 300 zł (50 min)
+- Krótka konsultacja psychiatryczna: 200 zł (15 min)
+- Wizyta psychologiczna/terapia: 200 zł (50 min)
+- Wizyta domowa: +100 zł do ceny wizyty
+
+## Kontakt
+- **Adres**: ul. Szlak 38/16, 31-153 Kraków
+- **Email**: kontakt@wisehealth.pl
+- **Rejestracja**: Online przez system MyDr (link na stronie)
+- **Telefon**: (Brak infolinii telefonicznej, kontakt mailowy lub przez mydr)
+
+## Ważne
+W sytuacji zagrożenia życia dzwoń na 112 lub zgłoś się na SOR.

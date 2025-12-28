@@ -144,9 +144,8 @@ export default function FAQPage(): React.ReactNode {
                 Płatność za wizytę możesz dokonać:
               </p>
               <ul>
-                <li>Gotówką na miejscu</li>
-                <li>Kartą płatniczą w gabinecie</li>
-                <li>Przelewem przed wizytą online (dane do przelewu w potwierdzeniu wizyty)</li>
+                <li>Poprzez system płatności online (MyDr)</li>
+                <li>Przelewem online (dane do przelewu w potwierdzeniu wizyty)</li>
               </ul>
             </div>
           </div>

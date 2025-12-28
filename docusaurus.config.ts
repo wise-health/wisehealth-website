@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -26,7 +26,7 @@ const config: Config = {
   projectName: 'wisehealth-website', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  
+
   // Custom fields for MyDr integration
   customFields: {
     // MyDr booking - patients will be directed to MyDr portal where they can find WiseHealth (facility_id: 26915)
@@ -46,8 +46,12 @@ const config: Config = {
     [
       'classic',
       {
-        docs: false, // Disable docs, we're using pages only
-        blog: false, // Disable blog
+        docs: false,
+        blog: {
+          showReadingTime: true,
+          blogSidebarTitle: 'Najnowsze wpisy',
+          blogSidebarCount: 'ALL',
+        },
         pages: {
           // Enable pages plugin
         },
@@ -74,11 +78,12 @@ const config: Config = {
         srcDark: 'img/logo-no-background.png',
       },
       items: [
-        {to: '/oferta', label: 'Oferta', position: 'left'},
-        {to: '/zespol', label: 'Zespół', position: 'left'},
-        {to: '/cennik', label: 'Cennik', position: 'left'},
-        {to: '/faq', label: 'FAQ', position: 'left'},
-        {to: '/kontakt', label: 'Kontakt', position: 'left'},
+        { to: '/oferta', label: 'Oferta', position: 'left' },
+        { to: '/zespol', label: 'Zespół', position: 'left' },
+        { to: '/cennik', label: 'Cennik', position: 'left' },
+        { to: '/blog', label: 'Blog', position: 'left' },
+        { to: '/faq', label: 'FAQ', position: 'left' },
+        { to: '/kontakt', label: 'Kontakt', position: 'left' },
         {
           label: 'Umów wizytę',
           position: 'right',

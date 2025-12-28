@@ -73,22 +73,22 @@ export default function KontaktPage(): React.ReactNode {
                 <strong>Komunikacja miejska:</strong>
               </p>
               <ul>
-                <li>Tramwaj: linie 4, 8, 13, 14, przystanek "Politechnika" lub "Filharmonia" (ok. 5 min spacerem)</li>
-                <li>Autobus: linie 124, 164, 169, 173, 179, 194, przystanek "Politechnika"</li>
+                <li>Tramwaj: przystanek "Nowy Kleparz" (linie: 18, 50) lub "Pędzichów" (linia 18) - ok. 3 min spacerem</li>
+                <li>Autobus: linie 124, 152, 164, 169, 179, 192, 424, 503, przystanek "Nowy Kleparz"</li>
               </ul>
               <p>
                 <strong>Parking:</strong><br />
                 W pobliżu dostępne są miejsca parkingowe w Strefie Płatnego Parkowania. Najbliższy parking podziemny: Parking Warszawskie.
               </p>
-              
+
               <div className="margin-top--lg">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.9285!2d19.9297!3d50.0646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b5f09ee7ed5%3A0x8b!2sJanowa%2038%2C%2031-153%20Krak%C3%B3w!5e0!3m2!1spl!2spl!4v1234567890" 
-                  width="100%" 
-                  height="400" 
-                  style={{border:0, borderRadius: '1rem'}} 
-                  allowFullScreen 
-                  loading="lazy" 
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.9285!2d19.9385!3d50.0694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b0e5b5b5b5b%3A0x5b5b5b5b5b5b5b5b!2sul.%20Szlak%2038%2C%2031-153%20Krak%C3%B3w!5e0!3m2!1spl!2spl!4v1234567890"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0, borderRadius: '1rem' }}
+                  allowFullScreen
+                  loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Mapa dojazdu do WiseHealth">
                 </iframe>
@@ -142,7 +142,7 @@ export default function KontaktPage(): React.ReactNode {
               <ul>
                 <li>
                   <strong>W sytuacji nagłego zagrożenia życia lub zdrowia zgłoś się na Szpitalny Oddział
-                  Ratunkowy lub zadzwoń pod numer alarmowy 112.</strong>
+                    Ratunkowy lub zadzwoń pod numer alarmowy 112.</strong>
                 </li>
                 <li>
                   E-mail i formularz kontaktowy nie służą do zgłaszania pilnych stanów zagrożenia
