@@ -10,33 +10,40 @@ interface TeamMemberCardProps {
   title: string;
   description: string;
   tags?: string[];
+  imagePosition?: string;
 }
 
-function TeamMemberCard({ name, title, description, tags, photo }: TeamMemberCardProps & { photo?: string }) {
+function TeamMemberCard({ name, title, description, tags, photo, imagePosition }: TeamMemberCardProps & { photo?: string }) {
   return (
-    <div className="card margin-bottom--lg" style={{height: '100%'}}>
+    <div className="card margin-bottom--lg" style={{
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
       {photo && (
         <div className="card__image">
-          <img 
-            src={photo} 
+          <img
+            src={photo}
             alt={`${name} - ${title}`}
             style={{
               width: '100%',
-              height: '300px',
+              height: '350px',
               objectFit: 'cover',
-              borderRadius: 'var(--ifm-card-border-radius) var(--ifm-card-border-radius) 0 0'
+              objectPosition: imagePosition || 'center',
+              borderRadius: 'var(--ifm-card-border-radius) var(--ifm-card-border-radius) 0 0',
+              display: 'block'
             }}
           />
         </div>
       )}
-      <div className="card__body">
+      <div className="card__body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Heading as="h3">{name}</Heading>
-        <p><strong style={{color: 'var(--ifm-color-primary)'}}>{title}</strong></p>
-        <p>{description}</p>
+        <p><strong style={{ color: 'var(--ifm-color-primary)' }}>{title}</strong></p>
+        <p style={{ flex: 1 }}>{description}</p>
         {tags && tags.length > 0 && (
-          <div style={{marginTop: '1rem'}}>
+          <div style={{ marginTop: '1rem' }}>
             {tags.map((tag, idx) => (
-              <span 
+              <span
                 key={idx}
                 className="badge badge--secondary"
                 style={{
@@ -73,6 +80,7 @@ export default function ZespolPage(): React.ReactNode {
                 name="Agnieszka Krawczyk"
                 title="Współzałożycielka, lek. med., specjalista psychiatra"
                 photo="/img/agnieszka-krawczyk.jpg"
+                imagePosition="top"
                 description="Zajmuje się diagnozowaniem i leczeniem zaburzeń nastroju, zaburzeń lękowych oraz innych trudności natury psychicznej u osób dorosłych. W pracy stawia na spokojne tłumaczenie możliwych opcji leczenia i wspólne podejmowanie decyzji z pacjentem."
                 tags={[
                   'Psychiatria',
@@ -87,6 +95,7 @@ export default function ZespolPage(): React.ReactNode {
                 name="Marcin Pawlus"
                 title="Współzałożyciel, mgr psychologii, psychoterapeuta"
                 photo="/img/marcin_pawlus_img.jpg"
+                imagePosition="center"
                 description="Prowadzi konsultacje psychologiczne oraz psychoterapię indywidualną osób dorosłych. Pracuje z osobami w kryzysach życiowych, doświadczającymi lęku, obniżonego nastroju oraz trudności w relacjach."
                 tags={[
                   'Psychoterapia',
@@ -98,6 +107,8 @@ export default function ZespolPage(): React.ReactNode {
             </div>
           </div>
         </section>
+
+
 
         <section className="margin-top--xl margin-bottom--xl">
           <Heading as="h2">Jak dobrać specjalistę?</Heading>
@@ -121,12 +132,12 @@ export default function ZespolPage(): React.ReactNode {
               </p>
               <ul>
                 <li>
-                  <strong>Psychiatra</strong> – gdy rozważasz leczenie farmakologiczne, potrzebujesz 
+                  <strong>Psychiatra</strong> – gdy rozważasz leczenie farmakologiczne, potrzebujesz
                   recepty, zwolnienia lub diagnozy medycznej.
                 </li>
                 <li>
-                  <strong>Psycholog/psychoterapeuta</strong> – gdy chcesz pracować nad swoimi emocjami, 
-                  myślami i zachowaniami bez lub równolegle z leczeniem farmakologicznym.
+                  <strong>Psycholog/psychoterapeuta</strong> – gdy chcesz pracować nad swoimi emocjami,
+                  myśliami i zachowaniami bez lub równolegle z leczeniem farmakologicznym.
                 </li>
               </ul>
             </div>

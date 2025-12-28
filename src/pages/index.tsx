@@ -9,9 +9,46 @@ import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "MedicalBusiness",
+          "name": "WiseHealth",
+          "image": "https://wisehealth.pl/img/logo-icon.png",
+          "@id": "https://wisehealth.pl",
+          "url": "https://wisehealth.pl",
+          "telephone": "",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Szlak 38/16",
+            "addressLocality": "Kraków",
+            "postalCode": "31-153",
+            "addressCountry": "PL"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 50.0694,
+            "longitude": 19.9385
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "20:00"
+          },
+          "priceRange": "$$"
+        })}
+      </script>
+
       <div className="container">
         <div className="row">
           <div className="col col--7">
@@ -19,10 +56,10 @@ function HomepageHeader() {
               Twoja droga do lepszego samopoczucia zaczyna się tutaj
             </Heading>
             <p className="hero__subtitle">
-              <strong>Profesjonalna opieka psychiatryczna i psychologiczna w Krakowie</strong> – 
+              <strong>Profesjonalna opieka psychiatryczna i psychologiczna w Krakowie</strong> –
               bez długiego czekania, w atmosferze pełnej dyskrecji i zrozumienia.
             </p>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
               <div style={{
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
                 padding: '1.25rem',
@@ -30,11 +67,11 @@ function HomepageHeader() {
                 borderLeft: '4px solid var(--ifm-color-primary-lightest)',
                 backdropFilter: 'blur(10px)'
               }}>
-                <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-                  <div style={{fontSize: '2rem'}}>👨‍⚕️</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ fontSize: '2rem' }}>👨‍⚕️</div>
                   <div>
-                    <h4 style={{margin: 0, fontSize: '1.1rem', fontWeight: 700}}>Doświadczeni specjaliści</h4>
-                    <p style={{margin: 0, opacity: 0.9, fontSize: '0.95rem'}}>Psychiatra i psycholog z wieloletnim doświadczeniem</p>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Doświadczeni specjaliści</h4>
+                    <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Psychiatra i psycholog z wieloletnim doświadczeniem</p>
                   </div>
                 </div>
               </div>
@@ -45,11 +82,11 @@ function HomepageHeader() {
                 borderLeft: '4px solid var(--ifm-color-primary-lightest)',
                 backdropFilter: 'blur(10px)'
               }}>
-                <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-                  <div style={{fontSize: '2rem'}}>💻</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ fontSize: '2rem' }}>💻</div>
                   <div>
-                    <h4 style={{margin: 0, fontSize: '1.1rem', fontWeight: 700}}>Elastyczne formy wizyty</h4>
-                    <p style={{margin: 0, opacity: 0.9, fontSize: '0.95rem'}}>Wizyty online, stacjonarne lub domowe – wybierz wygodną formę</p>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Elastyczne formy wizyty</h4>
+                    <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Wizyty online, stacjonarne lub domowe – wybierz wygodną formę</p>
                   </div>
                 </div>
               </div>
@@ -60,11 +97,11 @@ function HomepageHeader() {
                 borderLeft: '4px solid var(--ifm-color-primary-lightest)',
                 backdropFilter: 'blur(10px)'
               }}>
-                <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-                  <div style={{fontSize: '2rem'}}>🏛️</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ fontSize: '2rem' }}>🏛️</div>
                   <div>
-                    <h4 style={{margin: 0, fontSize: '1.1rem', fontWeight: 700}}>Dyskrecja i profesjonalizm</h4>
-                    <p style={{margin: 0, opacity: 0.9, fontSize: '0.95rem'}}>Komfortowy gabinet w centrum Krakowa</p>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Dyskrecja i profesjonalizm</h4>
+                    <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Komfortowy gabinet w centrum Krakowa</p>
                   </div>
                 </div>
               </div>
@@ -100,7 +137,7 @@ function HomepageHeader() {
 function ServiceCard({ title, description, image }: { title: string; description: string; image?: string }) {
   return (
     <div className="col col--4 margin-bottom--lg">
-      <div className="card service-card-with-bg" style={{ 
+      <div className="card service-card-with-bg" style={{
         height: '100%',
         overflow: 'hidden',
         position: 'relative'
@@ -118,8 +155,8 @@ function ServiceCard({ title, description, image }: { title: string; description
             zIndex: 0
           }} />
         )}
-        <div className="card__body" style={{ 
-          position: 'relative', 
+        <div className="card__body" style={{
+          position: 'relative',
           zIndex: 1
         }}>
           <h3>{title}</h3>
@@ -244,7 +281,7 @@ function FinalCTA() {
 }
 
 export default function Home(): React.ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title="Strona główna"

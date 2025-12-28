@@ -1,19 +1,44 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+psychiatria:
+  label: Psychiatria
+  permalink: /psychiatria
+  description: Artykuły o zdrowiu psychicznym i leczeniu psychiatrycznym.
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+psychologia:
+  label: Psychologia
+  permalink: /psychologia
+  description: Artykuły o psychologii i diagnozie psychologicznej.
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+psychoterapia:
+  label: Psychoterapia
+  permalink: /psychoterapia
+  description: Artykuły o procesie psychoterapii i jej nurtach.
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+edukacja:
+  label: Edukacja
+  permalink: /edukacja
+  description: Materiały edukacyjne i poradnikowe.
+
+pierwsza wizyta:
+  label: Pierwsza wizyta
+  permalink: /pierwsza-wizyta
+  description: Porady dotyczące przygotowania się do pierwszej wizyty u specjalisty.
+
+poradnik:
+  label: Poradnik
+  permalink: /poradnik
+  description: Praktyczne wskazówki dla pacjentów.
+
+leki:
+  label: Leki
+  permalink: /leki
+  description: Informacje o farmakoterapii i lekach.
+
+mity:
+  label: Mity
+  permalink: /mity
+  description: Rozprawiamy się z mitami o zdrowiu psychicznym.
+
+bezpieczeństwo:
+  label: Bezpieczeństwo
+  permalink: /bezpieczenstwo
+  description: Informacje o bezpieczeństwie leczenia.

@@ -50,31 +50,31 @@ export default function CennikPage(): React.ReactNode {
               </thead>
               <tbody>
                 <PriceRow
-                  name="Pierwsza wizyta (konsultacja diagnostyczna + pierwsza wizyta)"
+                  name="🩺 Pierwsza wizyta (konsultacja diagnostyczna + pierwsza wizyta)"
                   duration="ok. 45 min"
                   price="250 zł"
                   notes="kompleksowa ocena, ustalenie planu terapii"
                 />
                 <PriceRow
-                  name="Wizyta psychiatryczna"
+                  name="💊 Wizyta psychiatryczna"
                   duration="50 min"
                   price="300 zł"
                   notes="konsultacja z lekarzem psychiatrą, farmakoterapia"
                 />
                 <PriceRow
-                  name="Krótka konsultacja psychiatryczna"
+                  name="⏱️ Krótka konsultacja psychiatryczna"
                   duration="15 min"
                   price="200 zł"
                   notes="wizyta kontrolna, omówienie kuracji, przedłużenie recepty"
                 />
                 <PriceRow
-                  name="Wizyta psychologiczna"
+                  name="🧠 Wizyta psychologiczna"
                   duration="50 min"
                   price="200 zł"
                   notes="sesja psychoterapeutyczna indywidualna"
                 />
                 <PriceRow
-                  name="Wizyta domowa"
+                  name="🏠 Wizyta domowa"
                   duration="wg. ustaleń"
                   price="+ 100 zł"
                   notes="dodatkowo do ceny wizyty, dojazd do pacjenta"
