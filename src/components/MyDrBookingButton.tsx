@@ -47,7 +47,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
       if (typeof window.PatientsPlugin !== 'undefined') {
         try {
           new window.PatientsPlugin().init({
-            app: 'https://mydr.pl/patients_plugin',
+            app: 'https://plugin.mydr.pl/patients_plugin',
             plugin: 'https://mydr.pl/static',
           });
         } catch (error) {
@@ -66,7 +66,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
       if (typeof window.PatientsPlugin !== 'undefined') {
         try {
           new window.PatientsPlugin().init({
-            app: 'https://mydr.pl/patients_plugin',
+            app: 'https://plugin.mydr.pl/patients_plugin',
             plugin: 'https://mydr.pl/static',
           });
           console.log('MyDr PatientsPlugin initialized successfully');
