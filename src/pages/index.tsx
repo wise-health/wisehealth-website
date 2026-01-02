@@ -67,11 +67,11 @@ function HomepageHeader() {
                 borderLeft: '4px solid var(--ifm-color-primary-lightest)',
                 backdropFilter: 'blur(10px)'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ fontSize: '2rem' }}>👨‍⚕️</div>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Doświadczeni specjaliści</h4>
-                    <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Psychiatra i psycholog z wieloletnim doświadczeniem</p>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                  <div style={{ fontSize: '2rem', lineHeight: 1 }}>👨‍⚕️</div>
+                  <div style={{ flex: 1 }}>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.3 }}>Doświadczeni specjaliści</h4>
+                    <p style={{ margin: '0.25rem 0 0 0', opacity: 0.9, fontSize: '0.95rem', lineHeight: 1.4 }}>Psychiatra i psycholog z wieloletnim doświadczeniem</p>
                   </div>
                 </div>
               </div>
@@ -82,11 +82,11 @@ function HomepageHeader() {
                 borderLeft: '4px solid var(--ifm-color-primary-lightest)',
                 backdropFilter: 'blur(10px)'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ fontSize: '2rem' }}>💻</div>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Elastyczne formy wizyty</h4>
-                    <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Wizyty online, stacjonarne lub domowe – wybierz wygodną formę</p>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                  <div style={{ fontSize: '2rem', lineHeight: 1 }}>💻</div>
+                  <div style={{ flex: 1 }}>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.3 }}>Elastyczne formy wizyty</h4>
+                    <p style={{ margin: '0.25rem 0 0 0', opacity: 0.9, fontSize: '0.95rem', lineHeight: 1.4 }}>Wizyty online, stacjonarne lub domowe – wybierz wygodną formę</p>
                   </div>
                 </div>
               </div>
@@ -97,11 +97,11 @@ function HomepageHeader() {
                 borderLeft: '4px solid var(--ifm-color-primary-lightest)',
                 backdropFilter: 'blur(10px)'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ fontSize: '2rem' }}>🏛️</div>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Dyskrecja i profesjonalizm</h4>
-                    <p style={{ margin: 0, opacity: 0.9, fontSize: '0.95rem' }}>Komfortowy gabinet w centrum Krakowa</p>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                  <div style={{ fontSize: '2rem', lineHeight: 1 }}>🏛️</div>
+                  <div style={{ flex: 1 }}>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.3 }}>Dyskrecja i profesjonalizm</h4>
+                    <p style={{ margin: '0.25rem 0 0 0', opacity: 0.9, fontSize: '0.95rem', lineHeight: 1.4 }}>Komfortowy gabinet w centrum Krakowa</p>
                   </div>
                 </div>
               </div>
