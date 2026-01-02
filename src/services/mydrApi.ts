@@ -1,28 +1,40 @@
 /**
- * MyDr API Service - placeholder dla przyszłej integracji z API MyDr
+ * MyDr API Service - Future integration placeholder
  * 
- * Ten plik zawiera zaślepki funkcji do komunikacji z API MyDr.
- * Dokumentacja API: https://api.mydr.pl/docs/
+ * This file contains TypeScript interfaces for potential future MyDr API integration.
+ * Currently, the website uses the MyDr widget for appointment booking.
  * 
- * TODO: Implementacja po otrzymaniu kluczy API i szczegółów integracji
+ * API Documentation: https://api.mydr.pl/docs/
+ * 
+ * @note This file is currently unused but kept for future reference.
+ * The MyDr widget handles all booking functionality via the PatientsPlugin.
  */
 
+/**
+ * Represents a time slot for appointments
+ */
 export interface TimeSlot {
   id: string;
   doctorId: string;
-  startTime: string; // ISO 8601
-  endTime: string; // ISO 8601
+  startTime: string; // ISO 8601 format
+  endTime: string; // ISO 8601 format
   available: boolean;
   visitType: 'in-person' | 'online';
 }
 
+/**
+ * Parameters for fetching available time slots
+ */
 export interface AvailableSlotsParams {
   doctorId?: string;
-  dateFrom: string; // ISO 8601
-  dateTo: string; // ISO 8601
+  dateFrom: string; // ISO 8601 format
+  dateTo: string; // ISO 8601 format
   visitType?: 'in-person' | 'online';
 }
 
+/**
+ * Payload for creating a new visit
+ */
 export interface CreateVisitPayload {
   slotId: string;
   patientData: {
@@ -35,6 +47,9 @@ export interface CreateVisitPayload {
   notes?: string;
 }
 
+/**
+ * Represents a visit/appointment
+ */
 export interface Visit {
   id: string;
   slotId: string;
@@ -46,51 +61,34 @@ export interface Visit {
 }
 
 /**
- * Pobiera dostępne terminy wizyt z API MyDr
+ * Configuration for MyDr API client
+ */
+export interface MyDrApiConfig {
+  apiKey: string;
+  baseUrl?: string;
+}
+
+/**
+ * Fetches available appointment slots from MyDr API
  * 
- * @param params - parametry wyszukiwania wolnych terminów
- * @returns Promise z listą dostępnych slotów
+ * @param params - Search parameters for available slots
+ * @param config - API configuration
+ * @returns Promise with list of available time slots
  * 
- * TODO: Implementacja wymaga:
- * - MYDR_API_KEY w zmiennych środowiskowych
- * - MYDR_API_BASE_URL w zmiennych środowiskowych
- * - Autentykacja zgodnie z dokumentacją API MyDr
+ * @example
+ * ```typescript
+ * const slots = await getAvailableSlots(
+ *   { dateFrom: '2025-12-20T00:00:00Z', dateTo: '2025-12-27T23:59:59Z' },
+ *   { apiKey: process.env.MYDR_API_KEY }
+ * );
+ * ```
  */
 export async function getAvailableSlots(
-  params: AvailableSlotsParams
+  params: AvailableSlotsParams,
+  config: MyDrApiConfig
 ): Promise<TimeSlot[]> {
-  // MOCK IMPLEMENTATION - zastąp prawdziwym wywołaniem API
-  console.warn('[mydrApi] getAvailableSlots: używam mock implementation');
+  const baseUrl = config.baseUrl || 'https://api.mydr.pl';
   
-  // Przykładowe mock dane
-  return Promise.resolve([
-    {
-      id: 'slot-1',
-      doctorId: 'doctor-1',
-      startTime: '2025-11-25T10:00:00Z',
-      endTime: '2025-11-25T11:00:00Z',
-      available: true,
-      visitType: 'in-person',
-    },
-    {
-      id: 'slot-2',
-      doctorId: 'doctor-1',
-      startTime: '2025-11-25T14:00:00Z',
-      endTime: '2025-11-25T15:00:00Z',
-      available: true,
-      visitType: 'online',
-    },
-  ]);
-
-  /*
-  // PRAWDZIWA IMPLEMENTACJA (odkomentuj po otrzymaniu dostępu do API):
-  const apiKey = process.env.MYDR_API_KEY;
-  const baseUrl = process.env.MYDR_API_BASE_URL || 'https://api.mydr.pl';
-  
-  if (!apiKey) {
-    throw new Error('MYDR_API_KEY nie jest ustawiony w zmiennych środowiskowych');
-  }
-
   const queryParams = new URLSearchParams({
     dateFrom: params.dateFrom,
     dateTo: params.dateTo,
@@ -100,7 +98,7 @@ export async function getAvailableSlots(
 
   const response = await fetch(`${baseUrl}/api/v1/slots?${queryParams}`, {
     headers: {
-      'Authorization': `Bearer ${apiKey}`,
+      'Authorization': `Bearer ${config.apiKey}`,
       'Content-Type': 'application/json',
     },
   });
@@ -111,48 +109,36 @@ export async function getAvailableSlots(
 
   const data = await response.json();
   return data.slots;
-  */
 }
 
 /**
- * Tworzy nową wizytę w systemie MyDr
+ * Creates a new visit in the MyDr system
  * 
- * @param payload - dane wizyty i pacjenta
- * @returns Promise z utworzoną wizytą
+ * @param payload - Visit and patient data
+ * @param config - API configuration
+ * @returns Promise with created visit details
  * 
- * TODO: Implementacja wymaga:
- * - MYDR_API_KEY w zmiennych środowiskowych
- * - MYDR_API_BASE_URL w zmiennych środowiskowych
- * - Autentykacja zgodnie z dokumentacją API MyDr
+ * @example
+ * ```typescript
+ * const visit = await createVisit(
+ *   {
+ *     slotId: 'slot-123',
+ *     patientData: { firstName: 'Jan', lastName: 'Kowalski', email: 'jan@example.com', phone: '+48123456789' }
+ *   },
+ *   { apiKey: process.env.MYDR_API_KEY }
+ * );
+ * ```
  */
-export async function createVisit(payload: CreateVisitPayload): Promise<Visit> {
-  // MOCK IMPLEMENTATION - zastąp prawdziwym wywołaniem API
-  console.warn('[mydrApi] createVisit: używam mock implementation');
-  
-  // Przykładowe mock dane
-  return Promise.resolve({
-    id: 'visit-123',
-    slotId: payload.slotId,
-    status: 'pending',
-    startTime: '2025-11-25T10:00:00Z',
-    endTime: '2025-11-25T11:00:00Z',
-    doctorId: 'doctor-1',
-    patientId: 'patient-1',
-  });
-
-  /*
-  // PRAWDZIWA IMPLEMENTACJA (odkomentuj po otrzymaniu dostępu do API):
-  const apiKey = process.env.MYDR_API_KEY;
-  const baseUrl = process.env.MYDR_API_BASE_URL || 'https://api.mydr.pl';
-  
-  if (!apiKey) {
-    throw new Error('MYDR_API_KEY nie jest ustawiony w zmiennych środowiskowych');
-  }
+export async function createVisit(
+  payload: CreateVisitPayload,
+  config: MyDrApiConfig
+): Promise<Visit> {
+  const baseUrl = config.baseUrl || 'https://api.mydr.pl';
 
   const response = await fetch(`${baseUrl}/api/v1/visits`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${apiKey}`,
+      'Authorization': `Bearer ${config.apiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
@@ -164,20 +150,4 @@ export async function createVisit(payload: CreateVisitPayload): Promise<Visit> {
 
   const data = await response.json();
   return data.visit;
-  */
-}
-
-/**
- * Sprawdza status połączenia z API MyDr
- * 
- * @returns Promise z informacją o statusie API
- */
-export async function checkApiStatus(): Promise<{ status: 'ok' | 'error'; message: string }> {
-  // MOCK IMPLEMENTATION
-  console.warn('[mydrApi] checkApiStatus: używam mock implementation');
-  
-  return Promise.resolve({
-    status: 'ok',
-    message: 'Mock API - gotowy do integracji z prawdziwym API MyDr',
-  });
 }
