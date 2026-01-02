@@ -1,7 +1,7 @@
-# WiseHealth – Klinika Zdrowia Psychicznego Kraków
+# WiseHealth – Poradnia Zdrowia Psychicznego Kraków
 
 ## Opis
-WiseHealth to prywatna klinika w Krakowie oferująca kompleksową opiekę psychiatryczną i psychologiczną. Łączymy podejście medyczne z psychoterapeutycznym.
+WiseHealth to prywatna poradnia w Krakowie oferująca kompleksową opiekę psychiatryczną i psychologiczną. Łączymy podejście medyczne z psychoterapeutycznym.
 
 ## Usługi
 - Konsultacje psychiatryczne (diagnoza, farmakoterapia)

@@ -285,7 +285,7 @@ export default function Home(): React.ReactNode {
   return (
     <Layout
       title="Strona główna"
-      description="WiseHealth – prywatna klinika zdrowia psychicznego w Krakowie. Psychiatria, psychologia, terapia i konsultacje online.">
+      description="WiseHealth – prywatna poradnia zdrowia psychicznego w Krakowie. Psychiatria, psychologia, terapia i konsultacje online.">
       <HomepageHeader />
       <main>
         <WhyWiseHealth />

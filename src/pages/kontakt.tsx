@@ -78,7 +78,7 @@ export default function KontaktPage(): React.ReactNode {
               </ul>
               <p>
                 <strong>Parking:</strong><br />
-                W pobliżu dostępne są miejsca parkingowe w Strefie Płatnego Parkowania. Najbliższy parking podziemny: Parking Warszawskie.
+                W pobliżu dostępne są miejsca parkingowe w Strefie Płatnego Parkowania.
               </p>
 
               <div className="margin-top--lg">
