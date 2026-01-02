@@ -43,7 +43,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     
     # Content Security Policy (adjust as needed)
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mydr.pl; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://mydr.pl;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://mydr.pl; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://mydr.pl; frame-src https://mydr.pl;"
 
 [[headers]]
   for = "/static/*"

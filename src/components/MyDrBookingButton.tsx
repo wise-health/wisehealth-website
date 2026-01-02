@@ -44,10 +44,9 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
     if (existingScript) {
       scriptLoadedRef.current = true;
       // Jeśli skrypt już istnieje, zainicjalizuj plugin
-      if (window.PatientsPlugin) {
+      if (typeof window.PatientsPlugin !== 'undefined') {
         try {
-          const PatientsPlugin = new window.PatientsPlugin();
-          PatientsPlugin.init({
+          new window.PatientsPlugin().init({
             app: 'https://mydr.pl/patients_plugin',
             plugin: 'https://mydr.pl/static',
           });
@@ -64,10 +63,9 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
 
     script.onload = () => {
       scriptLoadedRef.current = true;
-      if (window.PatientsPlugin) {
+      if (typeof window.PatientsPlugin !== 'undefined') {
         try {
-          const PatientsPlugin = new window.PatientsPlugin();
-          PatientsPlugin.init({
+          new window.PatientsPlugin().init({
             app: 'https://mydr.pl/patients_plugin',
             plugin: 'https://mydr.pl/static',
           });
@@ -94,6 +92,14 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
     };
   }, []);
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Fallback: if widget doesn't work, open MyDr directly
+    if (!scriptLoadedRef.current || typeof window.PatientsPlugin === 'undefined') {
+      e.preventDefault();
+      window.open('https://mydr.pl/placowka/wisehealth-twoja-droga-do-lepszego-samopoczucia-26915', '_blank');
+    }
+  };
+
   return (
     <button
       ref={buttonRef}
@@ -105,6 +111,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
       data-evisit={evisit ? 'true' : 'false'}
       data-appname="drw"
       data-token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmYWNpbGl0eV9pZCI6MjY5MTV9.AkNeyST-oY_lzpL9AXCtwaauKJb3AVPFiUU7BxWLH2s"
+      onClick={handleClick}
       aria-label={label}
       style={{ cursor: 'pointer' }}
     >
