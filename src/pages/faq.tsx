@@ -156,7 +156,7 @@ export default function FAQPage(): React.ReactNode {
             </div>
             <div className="card__body">
               <p>
-                WiseHealth to klinika prywatna, więc wizyty nie są refundowane przez NFZ. 
+                WiseHealth to prywatna poradnia, więc wizyty nie są refundowane przez NFZ. 
                 Po wizycie otrzymasz fakturę, którą możesz odliczyć od podatku w ramach 
                 ulgi rehabilitacyjnej lub przedstawić w prywatnym ubezpieczeniu zdrowotnym 
                 (jeśli Twoja polisa to obejmuje).
