@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
 import JsonLd from '@site/src/components/JsonLd';
 import {
   CLINIC,
@@ -195,6 +196,18 @@ export default function ZespolPage(): React.ReactNode {
                   myślami i zachowaniami bez lub równolegle z leczeniem farmakologicznym.
                 </li>
               </ul>
+            </div>
+          </div>
+        </section>
+        <section className="margin-top--xl margin-bottom--xl">
+          <div className="card" style={{ padding: '2rem' }}>
+            <div className="card__body text--center">
+              <Heading as="h2">Gotowy, żeby umówić wizytę?</Heading>
+              <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+                Wybierz specjalistę i termin w kalendarzu rejestracji online – stacjonarnie przy
+                ul. Szlak 38 w Krakowie lub online.
+              </p>
+              <MyDrBookingButton />
             </div>
           </div>
         </section>
