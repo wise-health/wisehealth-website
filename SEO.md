@@ -180,16 +180,36 @@ po cichu zablokowałaby skrypt.
 ### Test regresji: `scripts/verify-seo.py`
 
 ```bash
-npm run build && python3 scripts/verify-seo.py build
+npm run build && npm test
 ```
 
 Sprawdza **wygenerowany HTML** (a nie kod źródłowy): długości tytułów
 i opisów, dokładnie jeden `<h1>`, canonical, poprawność i kompletność
-structured data, higienę sitemap. Obecnie **63 testy, wszystkie przechodzą**.
+structured data, obecność przycisku rezerwacji na każdej stronie, numery
+kryzysowe na stronach medycznych, minimalną objętość treści na landingach
+oraz higienę sitemap. Obecnie **82 testy, wszystkie przechodzą**.
 
 Ten test istnieje, bo regresje SEO są ciche – nic się nie wywala, gdy schema
 się zepsuje, strony po prostu przestają rankować. Podczas wdrożenia wykrył
-realny błąd (zdublowany sufiks tytułu), który build przepuścił bez słowa.
+dwa realne błędy, które `npm run build` zaraportował jako sukces:
+zdublowany sufiks tytułu oraz stronę `/zespol` bez żadnego przycisku
+rezerwacji.
+
+### Pełna weryfikacja: `hermes verify`
+
+```bash
+hermes verify --port 3000 --json
+```
+
+Uruchamia bootstrap → build → typecheck → testy → start serwera → sprawdzenie
+gotowości. Przepis zapisany jest w `.hermes/environment.json`.
+
+**Uwaga – `--port` jest konieczny.** Autodetekcja nie ustala portu
+(`"port": null`) i odpytuje wtedy `127.0.0.1:8000`, gdzie odpowiedział
+niepowiązany lokalny proces – zwrócone **404 zostało zapisane jako „ready"**.
+Czyli fałszywa zieloność: weryfikacja przechodziła, nie dotknąwszy tego
+serwisu ani razu. Zawsze podawaj port i sprawdź, czy `readiness.statusCode`
+to `200`, a nie cokolwiek innego.
 
 ---
 
