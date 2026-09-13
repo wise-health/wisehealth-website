@@ -5,9 +5,26 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'WiseHealth – psychiatria i psychologia, Kraków',
+  /**
+   * Brand-only site title.
+   *
+   * Docusaurus appends ` | <title>` to every page's title, so this string is
+   * charged against Google's ~60-65 character SERP cutoff on EVERY page. It
+   * previously read 'WiseHealth – psychiatria i psychologia, Kraków' (47
+   * chars), which truncated the meaningful, keyword-bearing part of every
+   * title. Keep it short; per-page titles carry the keywords.
+   */
+  title: 'WiseHealth',
   tagline: 'Psychiatra i psycholog w Krakowie – umów wizytę online',
   favicon: 'img/logo-icon.png',
+
+  /**
+   * Separator between page title and site title.
+   * `scripts/verify-seo.py` enforces the resulting length budget against the
+   * built HTML, so a regression here fails the build check rather than
+   * silently costing click-through rate.
+   */
+  titleDelimiter: '|',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -26,6 +43,49 @@ const config: Config = {
   projectName: 'wisehealth-website', // Usually your repo name.
 
   onBrokenLinks: 'throw',
+
+  /**
+   * Site-wide <head> tags.
+   *
+   * ANALYTICS CHOICE — deliberate. We use Plausible, not Google Analytics.
+   * This is a mental-health clinic: pages like /leczenie-depresji-krakow reveal
+   * extremely sensitive information about the visitor. Plausible is cookieless,
+   * stores no personal data and no cross-site identifiers, so:
+   *   1. no consent banner is legally required for it (RODO/GDPR), and
+   *   2. we never build a profile of who read what about their own health.
+   * GA4 would put that data in a third country and require explicit consent,
+   * which most visitors decline — leaving us blind anyway.
+   *
+   * Both tags are opt-in via environment variables so the repo carries no
+   * account identifiers and local builds stay clean. Set in Netlify UI:
+   *   PLAUSIBLE_DOMAIN            e.g. wisehealth.pl
+   *   GOOGLE_SITE_VERIFICATION    token from Google Search Console
+   */
+  headTags: [
+    ...(process.env.PLAUSIBLE_DOMAIN
+      ? [
+          {
+            tagName: 'script',
+            attributes: {
+              defer: 'true',
+              'data-domain': process.env.PLAUSIBLE_DOMAIN,
+              src: 'https://plausible.io/js/script.js',
+            },
+          },
+        ]
+      : []),
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? [
+          {
+            tagName: 'meta',
+            attributes: {
+              name: 'google-site-verification',
+              content: process.env.GOOGLE_SITE_VERIFICATION,
+            },
+          },
+        ]
+      : []),
+  ],
 
   // Custom fields for MyDr integration
   customFields: {
@@ -51,12 +111,30 @@ const config: Config = {
           showReadingTime: true,
           blogSidebarTitle: 'Najnowsze wpisy',
           blogSidebarCount: 'ALL',
+          blogTitle: 'Blog WiseHealth – o zdrowiu psychicznym bez żargonu',
+          blogDescription:
+            'Rzetelne, przystępne artykuły o psychiatrii, psychoterapii i zdrowiu psychicznym, pisane przez specjalistów WiseHealth.',
         },
         pages: {
           // Enable pages plugin
         },
         theme: {
           customCss: './src/css/custom.css',
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          // Tag/author/archive listing pages are thin, near-duplicate content.
+          // Excluding them concentrates crawl budget on pages that can rank
+          // and keeps the sitemap an honest signal of what matters.
+          ignorePatterns: [
+            '/blog/tags/**',
+            '/blog/authors/**',
+            '/blog/archive',
+            '/markdown-page',
+            '/404',
+          ],
+          filename: 'sitemap.xml',
         },
       } satisfies Preset.Options,
     ],
@@ -79,6 +157,17 @@ const config: Config = {
       },
       items: [
         { to: '/oferta', label: 'Oferta', position: 'left' },
+        {
+          type: 'dropdown',
+          label: 'Pomoc',
+          position: 'left',
+          items: [
+            { to: '/psychiatra-krakow', label: 'Psychiatra Kraków' },
+            { to: '/psycholog-krakow', label: 'Psycholog i psychoterapia' },
+            { to: '/psychiatra-online', label: 'Konsultacja online' },
+            { to: '/leczenie-depresji-krakow', label: 'Leczenie depresji' },
+          ],
+        },
         { to: '/zespol', label: 'Zespół', position: 'left' },
         { to: '/cennik', label: 'Cennik', position: 'left' },
         { to: '/blog', label: 'Blog', position: 'left' },
@@ -119,6 +208,22 @@ const config: Config = {
         {
           title: 'Pomoc',
           items: [
+            {
+              label: 'Psychiatra Kraków',
+              to: '/psychiatra-krakow',
+            },
+            {
+              label: 'Psycholog Kraków',
+              to: '/psycholog-krakow',
+            },
+            {
+              label: 'Konsultacja online',
+              to: '/psychiatra-online',
+            },
+            {
+              label: 'Leczenie depresji',
+              to: '/leczenie-depresji-krakow',
+            },
             {
               label: 'FAQ',
               to: '/faq',

@@ -1,2 +1,14 @@
+# robots.txt – wisehealth.pl
+# Wszystkie treści są publiczne i przeznaczone do indeksowania.
+
 User-agent: *
 Allow: /
+
+# Strony listingowe bloga (tagi, autorzy, archiwum) to treść cienka
+# i zduplikowana – nie chcemy, żeby konkurowały w wynikach z artykułami.
+Disallow: /blog/tags/
+Disallow: /blog/authors/
+Disallow: /blog/archive
+Disallow: /markdown-page
+
+Sitemap: https://wisehealth.pl/sitemap.xml
