@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from html import unescape
 from pathlib import Path
 
 BUILD = Path(sys.argv[1] if len(sys.argv) > 1 else "build")
@@ -49,6 +50,34 @@ NEEDS_FAQ_SCHEMA = [
     "psychiatra-online",
     "leczenie-depresji-krakow",
 ]
+
+# Every page a patient can land on must offer a way to book. A page that
+# convinces someone and then gives them nothing to click is a dead end — this
+# caught /zespol shipping with zero booking CTA.
+NEEDS_BOOKING_CTA = [
+    "",
+    "psychiatra-krakow",
+    "psycholog-krakow",
+    "psychiatra-online",
+    "leczenie-depresji-krakow",
+    "faq",
+    "zespol",
+    "cennik",
+    "oferta",
+    "kontakt",
+]
+
+# Medical (YMYL) pages must always surface the emergency route. Non-negotiable:
+# someone in crisis may land here from a search for their own symptoms.
+NEEDS_CRISIS_INFO = [
+    "psychiatra-krakow",
+    "psycholog-krakow",
+    "psychiatra-online",
+    "leczenie-depresji-krakow",
+    "faq",
+]
+
+MIN_LANDING_WORDS = 400
 
 MAX_TITLE = 65
 MAX_DESCRIPTION = 165
@@ -111,6 +140,19 @@ def meta(html: str, name: str) -> str | None:
         html,
     )
     return m.group(1) if m else None
+
+
+def visible_text(html: str) -> str:
+    """Approximate the copy a human actually reads, from <main>.
+
+    Checking rendered text rather than source guards against the failure mode
+    where a page builds and returns 200 but ships an empty or stub body.
+    """
+    stripped = re.sub(r"<script.*?</script>", " ", html, flags=re.S)
+    stripped = re.sub(r"<style.*?</style>", " ", stripped, flags=re.S)
+    main = re.search(r"<main.*?</main>", stripped, re.S)
+    body = main.group(0) if main else stripped
+    return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", body))).strip()
 
 
 print(f"Verifying build output in: {BUILD.resolve()}\n")
@@ -205,6 +247,30 @@ for slug in REQUIRED_PAGES:
         fail(f"{label} has no og:title")
     else:
         ok("open graph")
+
+    # --- rendered copy -----------------------------------------------------
+    # A page can build cleanly and return 200 while shipping an empty shell;
+    # only the rendered text proves otherwise.
+    text = visible_text(html)
+    words = len(text.split())
+
+    if slug in NEEDS_BOOKING_CTA:
+        if "Umów wizytę" not in text:
+            fail(f"{label} renders no booking CTA — a dead end for the patient")
+        else:
+            ok("booking CTA")
+
+    if slug in NEEDS_CRISIS_INFO:
+        if "112" not in text:
+            fail(f"{label} is medical content with no emergency number (112)")
+        else:
+            ok("crisis info")
+
+    if slug in NEEDS_CLINIC_SCHEMA and slug != "":
+        if words < MIN_LANDING_WORDS:
+            fail(f"{label} renders only {words} words (<{MIN_LANDING_WORDS}) — too thin to rank")
+        else:
+            ok(f"substantive copy ({words} words)")
 
     print()
 
