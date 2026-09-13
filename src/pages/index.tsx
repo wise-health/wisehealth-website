@@ -5,6 +5,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+import JsonLd from '@site/src/components/JsonLd';
+import { buildLocalBusinessSchema } from '@site/src/data/clinic';
 
 import styles from './index.module.css';
 
@@ -12,43 +14,6 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "MedicalBusiness",
-          "name": "WiseHealth",
-          "image": "https://wisehealth.pl/img/logo-icon.png",
-          "@id": "https://wisehealth.pl",
-          "url": "https://wisehealth.pl",
-          "telephone": "",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "ul. Szlak 38/16",
-            "addressLocality": "Kraków",
-            "postalCode": "31-153",
-            "addressCountry": "PL"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 50.0694,
-            "longitude": 19.9385
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday"
-            ],
-            "opens": "09:00",
-            "closes": "20:00"
-          },
-          "priceRange": "$$"
-        })}
-      </script>
-
       <div className="container">
         <div className="row">
           <div className="col col--7">
@@ -284,8 +249,9 @@ export default function Home(): React.ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title="Strona główna"
-      description="WiseHealth – prywatna poradnia zdrowia psychicznego w Krakowie. Psychiatria, psychologia, terapia i konsultacje online.">
+      title="Psychiatra i psycholog Kraków – poradnia zdrowia"
+      description="Prywatna poradnia zdrowia psychicznego w Krakowie. Psychiatra, psycholog i psychoterapia – przy ul. Szlak 38 oraz online. Bez skierowania.">
+      <JsonLd schema={buildLocalBusinessSchema()} />
       <HomepageHeader />
       <main>
         <WhyWiseHealth />
