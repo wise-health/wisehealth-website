@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "recipe": {
+    "name": "Node.js app",
+    "kind": "node",
+    "bootstrap": [
+      "npm install"
+    ],
+    "build": [
+      "npm run build",
+      "npm run typecheck"
+    ],
+    "test": [
+      "npm run test"
+    ],
+    "start": "npm run start",
+    "port": null,
+    "readinessPath": "/",
+    "evidence": [
+      "Detected package.json",
+      "Package manager: npm",
+      "Scripts: docusaurus, start, build, swizzle, deploy, clear, serve, write-translations, write-heading-ids, typecheck, test"
+    ]
+  },
+  "updatedAt": "2026-09-13T09:38:37.869806+00:00"
+}

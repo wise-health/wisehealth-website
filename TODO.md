@@ -1,27 +1,31 @@
 # WiseHealth Website - Production TODO Checklist
 
+> **Widoczność / SEO:** osobny, aktualny plan operacyjny znajduje się w
+> [`SEO.md`](./SEO.md). Zawiera zadania wymagające dostępów (ZnanyLekarz,
+> Google Business Profile) oraz opis tego, co zostało już wdrożone.
+
 Use this checklist to track what needs to be done before going live.
 
 ## 📝 Content Updates
 
 ### Team Page (`src/pages/zespol.tsx`)
-- [ ] Add real names and titles for psychiatrists
-- [ ] Add real names and titles for psychologists/therapists
-- [ ] Add professional photos (place in `static/img/team/`)
-- [ ] Update specializations and bios
+- [x] Add real names and titles for psychiatrists
+- [x] Add real names and titles for psychologists/therapists
+- [x] Add professional photos
+- [x] Update specializations and bios
 - [ ] Verify contact methods (online/in-person)
 
 ### Contact Page (`src/pages/kontakt.tsx`)
-- [ ] Add real clinic address
-- [ ] Add real phone number
-- [ ] Add real email address
+- [x] Add real clinic address (ul. Szlak 38/16)
+- [ ] **BLOCKED – decision needed:** publish a phone number, or commit to online-only registration. See SEO.md §3. Every competitor in the SERP leads with a number. When decided, set `telephone` in `src/data/clinic.ts` (ONE place — the whole site picks it up).
+- [x] Add real email address (kontakt@wisehealth.pl)
 - [ ] Add Google Maps embed code
 - [ ] Verify public transport information
 - [ ] Verify parking information
 - [ ] Test email links
 
 ### Pricing Page (`src/pages/cennik.tsx`)
-- [ ] Confirm all service prices
+- [x] Confirm all service prices
 - [ ] Verify package prices and savings
 - [ ] Update payment methods if different
 - [ ] Confirm cancellation policy
@@ -36,7 +40,7 @@ Use this checklist to track what needs to be done before going live.
 ### Legal Pages
 - [ ] Review privacy policy with legal counsel
 - [ ] Review RODO clause with legal counsel
-- [ ] Add registered company details
+- [x] Add registered company details (CEREDUO Sp. z o.o., KRS 0001042565)
 - [ ] Verify data retention periods
 - [ ] Add Data Protection Officer contact (if applicable)
 
@@ -49,7 +53,7 @@ Use this checklist to track what needs to be done before going live.
 
 ## 🔌 MyDr Integration
 
-- [ ] Obtain MyDr booking URL from MyDr team
+- [x] Obtain MyDr booking URL from MyDr team (facility_id 26915)
 - [ ] Test MyDr booking URL in browser
 - [ ] Confirm booking flow works end-to-end
 - [ ] Test on mobile devices

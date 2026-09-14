@@ -1,9 +1,45 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+import JsonLd from '@site/src/components/JsonLd';
+import {
+  CLINIC,
+  SPECIALISTS,
+  buildBreadcrumbSchema,
+} from '@site/src/data/clinic';
 
-// Uwaga: wszystkie dane osobowe są przykładowe.
-// Zastąp je rzeczywistymi danymi personelu kliniki.
+/**
+ * Structured data for the founders.
+ *
+ * `sameAs` points at each specialist's verified ZnanyLekarz profile. This is
+ * how Google reconciles the person described here with the same person's
+ * review history on the directory — without it, the site and the profiles are
+ * two unrelated entities and the clinic gets no credit for either.
+ */
+function buildTeamSchema(): Record<string, unknown>[] {
+  return SPECIALISTS.map((specialist) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Physician',
+    name: specialist.displayName,
+    jobTitle: specialist.jobTitle,
+    medicalSpecialty: specialist.specialty,
+    ...(specialist.image ? { image: specialist.image } : {}),
+    sameAs: specialist.sameAs,
+    worksFor: { '@id': `${CLINIC.url}/#clinic` },
+    workLocation: {
+      '@type': 'Place',
+      name: CLINIC.name,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: CLINIC.address.streetAddress,
+        addressLocality: CLINIC.address.addressLocality,
+        postalCode: CLINIC.address.postalCode,
+        addressCountry: CLINIC.address.addressCountry,
+      },
+    },
+  }));
+}
 
 interface TeamMemberCardProps {
   name: string;
@@ -11,9 +47,11 @@ interface TeamMemberCardProps {
   description: string;
   tags?: string[];
   imagePosition?: string;
+  /** Verified external profile, rendered as a visible link. */
+  profileUrl?: string;
 }
 
-function TeamMemberCard({ name, title, description, tags, photo, imagePosition }: TeamMemberCardProps & { photo?: string }) {
+function TeamMemberCard({ name, title, description, tags, photo, imagePosition, profileUrl }: TeamMemberCardProps & { photo?: string }) {
   return (
     <div className="card margin-bottom--lg" style={{
       height: '100%',
@@ -57,6 +95,13 @@ function TeamMemberCard({ name, title, description, tags, photo, imagePosition }
             ))}
           </div>
         )}
+        {profileUrl && (
+          <p style={{ marginTop: '1rem', marginBottom: 0, fontSize: '0.9rem' }}>
+            <a href={profileUrl} target="_blank" rel="noopener">
+              Profil i opinie pacjentów w ZnanyLekarz →
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );
@@ -65,8 +110,17 @@ function TeamMemberCard({ name, title, description, tags, photo, imagePosition }
 export default function ZespolPage(): React.ReactNode {
   return (
     <Layout
-      title="Zespół"
-      description="Poznaj zespół specjalistów WiseHealth.">
+      title="Zespół – psychiatra i psychoterapeuta"
+      description="Założyciele WiseHealth: lek. med. Agnieszka Krawczyk (psychiatra) i mgr Marcin Pawlus (psycholog, psychoterapeuta). Gabinet Szlak 38, Kraków.">
+      <JsonLd
+        schema={[
+          ...buildTeamSchema(),
+          buildBreadcrumbSchema([
+            { name: 'Strona główna', path: '/' },
+            { name: 'Zespół', path: '/zespol' },
+          ]),
+        ]}
+      />
       <main className="container margin-vert--lg">
         <Heading as="h1">Założyciele</Heading>
         <p className="margin-bottom--lg">
@@ -88,6 +142,7 @@ export default function ZespolPage(): React.ReactNode {
                   'Depresja',
                   'Farmakoterapia',
                 ]}
+                profileUrl="https://www.znanylekarz.pl/agnieszka-aleksandra-krawczyk/psychiatra-psychoterapeuta/zabierzow"
               />
             </div>
             <div className="col col--6">
@@ -103,6 +158,7 @@ export default function ZespolPage(): React.ReactNode {
                   'Relacje',
                   'Rozwój osobisty',
                 ]}
+                profileUrl="https://www.znanylekarz.pl/marcin-pawlus/psycholog/krakow"
               />
             </div>
           </div>
@@ -121,7 +177,7 @@ export default function ZespolPage(): React.ReactNode {
               <ul>
                 <li>Umówić ogólną konsultację wstępną i wspólnie omówić możliwe dalsze kroki.</li>
                 <li>Skorzystać z informacji w opisach usług oraz w kalendarzu rejestracji online.</li>
-                <li>Skontaktować się z nami telefonicznie lub mailowo – chętnie pomożemy.</li>
+                <li>Napisać do nas na kontakt@wisehealth.pl – chętnie pomożemy dobrać specjalistę.</li>
               </ul>
               <p>
                 W razie potrzeby specjalista może zaproponować zmianę formy dalszego leczenia (np.
@@ -137,9 +193,21 @@ export default function ZespolPage(): React.ReactNode {
                 </li>
                 <li>
                   <strong>Psycholog/psychoterapeuta</strong> – gdy chcesz pracować nad swoimi emocjami,
-                  myśliami i zachowaniami bez lub równolegle z leczeniem farmakologicznym.
+                  myślami i zachowaniami bez lub równolegle z leczeniem farmakologicznym.
                 </li>
               </ul>
+            </div>
+          </div>
+        </section>
+        <section className="margin-top--xl margin-bottom--xl">
+          <div className="card" style={{ padding: '2rem' }}>
+            <div className="card__body text--center">
+              <Heading as="h2">Gotowy, żeby umówić wizytę?</Heading>
+              <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+                Wybierz specjalistę i termin w kalendarzu rejestracji online – stacjonarnie przy
+                ul. Szlak 38 w Krakowie lub online.
+              </p>
+              <MyDrBookingButton />
             </div>
           </div>
         </section>

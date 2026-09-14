@@ -1,30 +1,57 @@
 # WiseHealth – Poradnia Zdrowia Psychicznego Kraków
 
 ## Opis
-WiseHealth to prywatna poradnia w Krakowie oferująca kompleksową opiekę psychiatryczną i psychologiczną. Łączymy podejście medyczne z psychoterapeutycznym.
+WiseHealth to prywatna poradnia zdrowia psychicznego w Krakowie, oferująca kompleksową opiekę psychiatryczną i psychologiczną dla osób dorosłych. Łączymy podejście medyczne (psychiatria, farmakoterapia) z psychoterapeutycznym w jednym miejscu, bez odsyłania pacjenta do kolejnych placówek. Przyjmujemy stacjonarnie w centrum Krakowa oraz online (teleporady) w całej Polsce. Skierowanie nie jest wymagane.
 
 ## Usługi
-- Konsultacje psychiatryczne (diagnoza, farmakoterapia)
-- Psychoterapia indywidualna
+- Konsultacje psychiatryczne – diagnoza, farmakoterapia, prowadzenie leczenia
+- Wizyty kontrolne u psychiatry – ocena skuteczności leczenia, modyfikacja terapii, przedłużenie recepty
 - Konsultacje psychologiczne
-- Wsparcie w kryzysach życiowych, depresji, lękach, wypaleniu zawodowym
+- Psychoterapia indywidualna osób dorosłych
+- Teleporady i konsultacje wideo dla pacjentów z całej Polski
+- Wizyty domowe na terenie Krakowa
+- Wsparcie i kontynuacja leczenia po hospitalizacji psychiatrycznej lub oddziale dziennym
+
+## Obszary pomocy
+Zaburzenia nastroju (depresja, obniżony nastrój, chwiejność emocjonalna), zaburzenia lękowe (lęk uogólniony, napady paniki, fobie), bezsenność i zaburzenia rytmu snu, stres i wypalenie zawodowe, kryzysy życiowe, żałoba, rozstanie, trudności w relacjach.
 
 ## Zespół (Założyciele)
-- **Agnieszka Krawczyk**: Lekarz medycyny, specjalista psychiatra. Diagnoza i leczenie zaburzeń nastroju i lękowych u dorosłych.
-- **Marcin Pawlus**: Psycholog, psychoterapeuta. Terapia indywidualna, praca z kryzysami i relacjami.
+- **lek. med. Agnieszka Krawczyk** – specjalista psychiatra. Diagnozowanie i leczenie zaburzeń nastroju, zaburzeń lękowych oraz innych trudności natury psychicznej u osób dorosłych. Profil i opinie: https://www.znanylekarz.pl/agnieszka-aleksandra-krawczyk/psychiatra-psychoterapeuta/zabierzow
+- **mgr Marcin Pawlus** – psycholog, psychoterapeuta. Konsultacje psychologiczne i psychoterapia indywidualna dorosłych; praca z kryzysami życiowymi, lękiem, obniżonym nastrojem i trudnościami w relacjach. Profil i opinie: https://www.znanylekarz.pl/marcin-pawlus/psycholog/krakow
 
-## Cennik (Orientacyjny)
-- Pierwsza wizyta psychiatryczna: 250 zł (45 min)
-- Wizyta psychiatryczna kolejna: 300 zł (50 min)
-- Krótka konsultacja psychiatryczna: 200 zł (15 min)
-- Wizyta psychologiczna/terapia: 200 zł (50 min)
-- Wizyta domowa: +100 zł do ceny wizyty
+## Cennik (orientacyjny)
+- Pierwsza wizyta psychiatryczna (konsultacja diagnostyczna, ok. 45 min): 250 zł
+- Wizyta psychiatryczna (50 min): 300 zł
+- Krótka konsultacja psychiatryczna / wizyta kontrolna (15 min): 200 zł
+- Wizyta psychologiczna lub sesja psychoterapii (50 min): 200 zł
+- Wizyta domowa: +100 zł do ceny wizyty (w obrębie Krakowa)
+
+Ceny takie same dla wizyt stacjonarnych i online. Płatność w momencie rezerwacji. Bezpłatne odwołanie wizyty do 24 godzin przed terminem.
+
+## Rejestracja
+Wyłącznie online, przez system MyDr – wybór specjalisty, terminu i formy wizyty (stacjonarna lub online). Link do rejestracji dostępny na każdej podstronie serwisu.
 
 ## Kontakt
-- **Adres**: ul. Szlak 38/16, 31-153 Kraków
-- **Email**: kontakt@wisehealth.pl
-- **Rejestracja**: Online przez system MyDr (link na stronie)
-- **Telefon**: (Brak infolinii telefonicznej, kontakt mailowy lub przez mydr)
+- **Adres gabinetu**: ul. Szlak 38/16, 31-153 Kraków (wejście od ulicy, 1. piętro)
+- **Dojazd**: tramwaj – przystanek „Nowy Kleparz” (linie 18, 50) lub „Pędzichów” (linia 18), ok. 3 min pieszo; autobusy 124, 152, 164, 169, 179, 192, 424, 503
+- **E-mail**: kontakt@wisehealth.pl (odpowiedź zwykle w ciągu 24–48 h w dni robocze)
+- **Telefon**: brak infolinii telefonicznej – kontakt mailowy lub przez system rejestracji MyDr
+- **Godziny pracy**: pn–pt 9:00–20:00 (dostępność zależy od grafiku poszczególnych specjalistów)
+- **Podmiot prowadzący**: CEREDUO Sp. z o.o., KRS 0001042565
 
-## Ważne
-W sytuacji zagrożenia życia dzwoń na 112 lub zgłoś się na SOR.
+## Kluczowe strony
+- https://wisehealth.pl/psychiatra-krakow – psychiatra w Krakowie, wizyta bez skierowania
+- https://wisehealth.pl/psycholog-krakow – psycholog i psychoterapia w Krakowie
+- https://wisehealth.pl/psychiatra-online – teleporada psychiatryczna, e-recepta, e-zwolnienie
+- https://wisehealth.pl/leczenie-depresji-krakow – leczenie depresji
+- https://wisehealth.pl/cennik – pełny cennik
+- https://wisehealth.pl/faq – najczęstsze pytania
+
+## Ważne – sytuacje nagłe
+WiseHealth nie prowadzi pomocy doraźnej ani całodobowej. W sytuacji nagłego zagrożenia życia lub zdrowia, w tym przy nasilonych myślach samobójczych, należy zgłosić się na Szpitalny Oddział Ratunkowy lub zadzwonić pod numer alarmowy **112**.
+
+Telefony zaufania (bezpłatne):
+- **116 123** – dla osób dorosłych w kryzysie psychicznym (całodobowo)
+- **116 111** – dla dzieci i młodzieży
+
+E-mail i formularz kontaktowy nie służą do zgłaszania sytuacji nagłych.
