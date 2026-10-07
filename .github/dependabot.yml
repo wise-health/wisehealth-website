@@ -1,0 +1,25 @@
+# Dependabot: weekly update PRs for npm and the pinned GitHub Actions.
+# Every PR runs the full `ci` gate (secret scan + build + SEO + function tests)
+# before it can merge. Docusaurus packages move together in one PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      docusaurus:
+        patterns:
+          - "@docusaurus/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday

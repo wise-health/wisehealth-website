@@ -32,6 +32,7 @@ REQUIRED_PAGES = [
     "cennik",
     "kontakt",
     "oferta",
+    "blog",  # list page: upstream Docusaurus renders no <h1> (swizzled fix)
 ]
 
 # --- Clinic identity (NAP). Single truth lives in src/data/clinic.ts; these

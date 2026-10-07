@@ -47,3 +47,25 @@ scan that judges it. Changing an exception therefore needs an owner merge.
    force-push every affected ref, and ask GitHub Support to purge cached views and PR refs.
 3. If the credential could reach patient data, start the GDPR (RODO art. 33/34)
    breach assessment immediately — the 72 h clock runs from awareness.
+
+## Dependency advisories (npm audit)
+
+The site is static HTML; the only server code is `netlify/functions/mydr-status.mjs`,
+which has **no dependencies**. `npm audit` findings therefore concern build and
+dev-server tooling, not anything served to patients.
+
+As of 2026-10-07 (Docusaurus 3.10.2, after `npm audit fix`): 45 advisories, all from
+five root packages inside Docusaurus's own toolchain:
+
+| Package | Why it is not forced | Exposure |
+|---|---|---|
+| `braces` 3.0.3 | already the latest release; no upstream fix exists | build-time glob parsing |
+| `tinypool` 1.x | fix only in 2.x (major) | build worker options, not attacker-controlled |
+| `serialize-javascript` 6.x | fix only in 7.x (major) via webpack/terser plugins | build-time serialisation of our own config |
+| `postcss-selector-parser` 6.x | fix only in 7.x (major) via cssnano | our own CSS at build time |
+| `uuid` 8.x | fix only in 11+ (major) via sockjs | `npm start` dev server only |
+
+`npm audit fix --force` "fixes" these by **downgrading** Docusaurus to 3.7.0 — never run it.
+Overriding the majors risks silently breaking the build for no runtime benefit.
+Dependabot (`.github/dependabot.yml`) opens a PR as soon as Docusaurus ships updated
+dependencies; CI must pass before it merges.

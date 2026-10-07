@@ -29,3 +29,6 @@ credentials*
 !.env.example
 *.pem
 *.key
+
+# Netlify CLI local build/serve output
+.netlify/

@@ -30,6 +30,17 @@ const config: Config = {
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    // Docusaurus 3.10 turns on the Rspack "Faster" bundler under v4: true.
+    // Keep the proven webpack pipeline; adopt Faster deliberately, not via a bump.
+    faster: false,
+  },
+
+  // Blog posts are plain Markdown (`.md`) written by clinicians, not MDX:
+  // parse .md as CommonMark (HTML comments like <!--truncate--> stay valid)
+  // and keep MDX for .mdx only. Docusaurus 3.10 under v4 otherwise parses
+  // every .md as strict MDX and the build fails on the truncate marker.
+  markdown: {
+    format: 'detect',
   },
 
   // Set the production url of your site here
