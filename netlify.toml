@@ -25,12 +25,10 @@
   to = "/oferta"
   status = 301
 
-[[redirects]]
-  # Catch-all redirect for SPA (if needed)
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+# NO catch-all rewrite. Docusaurus emits a real HTML file per route plus
+# build/404.html, which Netlify serves with status 404 for unknown paths.
+# The old `/* -> /index.html 200` turned every typo and dead link into a
+# soft-404 (the homepage with 200), which search engines penalise.
 
 # Headers for security and performance
 [[headers]]

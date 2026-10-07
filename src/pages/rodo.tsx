@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import ClinicPhone from '@site/src/components/ClinicPhone';
+import { CLINIC } from '@site/src/data/clinic';
 
 export default function RODOPage(): React.ReactNode {
   return (
@@ -229,8 +231,9 @@ export default function RODOPage(): React.ReactNode {
               </p>
               <p>
                 <strong>E-mail:</strong> <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a><br />
-                <strong>Telefon:</strong> <a href="tel:+48123456789">+48 123 456 789</a><br />
-                <strong>Adres:</strong> [do uzupełnienia]
+                <strong>Telefon (recepcja):</strong> <ClinicPhone /> ({CLINIC.openingHours.display})<br />
+                <strong>Adres do korespondencji:</strong> {CLINIC.legalName}, gabinet WiseHealth,{' '}
+                {CLINIC.address.streetAddress}, {CLINIC.address.postalCode} {CLINIC.address.addressLocality}
               </p>
               <p className="margin-top--md">
                 <em>

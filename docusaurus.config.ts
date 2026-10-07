@@ -1,5 +1,6 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
+import {CLINIC} from './src/data/clinic';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -250,6 +251,10 @@ const config: Config = {
       ],
       copyright: `
         <div>
+          WiseHealth · ${CLINIC.address.streetAddress}, ${CLINIC.address.postalCode} ${CLINIC.address.addressLocality}
+          · Recepcja: <a href="tel:${CLINIC.telephone}" class="plausible-event-name=Phone+Click" style="color: inherit; white-space: nowrap;">${CLINIC.telephoneDisplay}</a>
+          (${CLINIC.openingHours.display})
+          <br />
           © ${new Date().getFullYear()} WiseHealth. Wszystkie prawa zastrzeżone.
           <br />
           <strong style="color: #ff6b6b;">W sytuacji zagrożenia życia dzwoń na 112 / 999</strong>

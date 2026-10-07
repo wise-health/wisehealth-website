@@ -2,6 +2,8 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+import ClinicPhone from '@site/src/components/ClinicPhone';
+import { CLINIC } from '@site/src/data/clinic';
 import JsonLd from '@site/src/components/JsonLd';
 import { FAQ_SECTIONS, FAQ_FLAT } from '@site/src/data/faq';
 import { buildBreadcrumbSchema, buildFaqSchema } from '@site/src/data/clinic';
@@ -51,8 +53,9 @@ export default function FAQPage(): React.ReactNode {
               <Heading as="h2">Masz inne pytanie?</Heading>
               <p>
                 Jeśli nie znalazłeś odpowiedzi na swoje pytanie, napisz do nas na{' '}
-                <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a>. Odpowiadamy zwykle
-                w ciągu 24–48 godzin w dni robocze.
+                <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a> (odpowiadamy zwykle
+                w ciągu 24–48 godzin w dni robocze) lub zadzwoń do recepcji: <ClinicPhone />{' '}
+                ({CLINIC.openingHours.display}).
               </p>
               <a href="/kontakt" className="button button--secondary button--lg margin-top--md">
                 Przejdź do kontaktu

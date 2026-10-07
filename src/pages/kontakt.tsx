@@ -2,12 +2,16 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+import ClinicPhone from '@site/src/components/ClinicPhone';
+import JsonLd from '@site/src/components/JsonLd';
+import { CLINIC, buildLocalBusinessSchema } from '@site/src/data/clinic';
 
 export default function KontaktPage(): React.ReactNode {
   return (
     <Layout
       title="Kontakt"
       description="Dane kontaktowe WiseHealth w Krakowie.">
+      <JsonLd schema={buildLocalBusinessSchema()} />
       <main className="container margin-vert--lg">
         <Heading as="h1">Kontakt</Heading>
 
@@ -34,12 +38,20 @@ export default function KontaktPage(): React.ReactNode {
                     31-153 Kraków
                   </p>
                   <p>
+                    <strong>Recepcja (telefon):</strong><br />
+                    <ClinicPhone /> · {CLINIC.openingHours.display}
+                  </p>
+                  <p>
                     <strong>E-mail:</strong><br />
-                    <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a>
+                    <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
+                  </p>
+                  <p>
+                    <strong>Godziny otwarcia:</strong><br />
+                    {CLINIC.openingHours.display}
                   </p>
                   <p className="text--secondary">
-                    Godziny pracy mogą się różnić w zależności od grafiku poszczególnych specjalistów.
-                    Aktualne dostępne terminy znajdziesz w kalendarzu rejestracji online.
+                    Terminy poszczególnych specjalistów zależą od ich grafiku – aktualne wolne
+                    terminy widać od razu w kalendarzu rejestracji online.
                   </p>
                 </div>
               </div>
@@ -56,6 +68,9 @@ export default function KontaktPage(): React.ReactNode {
                     MyDr. W kilka minut wybierzesz specjalistę, termin i formę konsultacji.
                   </p>
                   <MyDrBookingButton className="margin-top--md" />
+                  <p className="text--secondary margin-top--md">
+                    Wolisz porozmawiać? Recepcja: <ClinicPhone /> ({CLINIC.openingHours.display}).
+                  </p>
                 </div>
               </div>
             </div>
@@ -81,17 +96,20 @@ export default function KontaktPage(): React.ReactNode {
                 W pobliżu dostępne są miejsca parkingowe w Strefie Płatnego Parkowania.
               </p>
 
+              {/*
+                No embedded Google map: the site CSP (netlify.toml frame-src) only
+                allows MyDr frames, so the embed rendered as a blocked empty box —
+                and it would load Google cookies before any consent. A directions
+                link works everywhere and opens the phone's own maps app.
+              */}
               <div className="margin-top--lg">
-                <iframe
-                  src="https://www.google.com/maps?q=Szlak+38,+31-153+Kraków,+Poland&output=embed&z=17"
-                  width="100%"
-                  height="400"
-                  style={{ border: 0, borderRadius: '1rem' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Mapa dojazdu do WiseHealth">
-                </iframe>
+                <a
+                  className="button button--secondary button--lg"
+                  href={CLINIC.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Wyznacz trasę (Mapy Google)
+                </a>
                 <p className="text--secondary margin-top--sm">
                   <small>Dokładna lokalizacja gabinetu: ul. Szlak 38/16, Kraków (wejście od ulicy, 1 piętro)</small>
                 </p>
@@ -109,7 +127,8 @@ export default function KontaktPage(): React.ReactNode {
                 napisz do nas na adres <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a>.
               </p>
               <p className="text--secondary">
-                Odpowiadamy na wiadomości w godzinach pracy, zazwyczaj w ciągu 24-48 godzin.
+                Odpowiadamy na wiadomości w godzinach pracy, zazwyczaj w ciągu 24–48 godzin.
+                Jeśli sprawa jest pilna, zadzwoń do recepcji: <ClinicPhone />.
               </p>
               {/* 
                 TODO: Możesz dodać formularz kontaktowy używając Netlify Forms

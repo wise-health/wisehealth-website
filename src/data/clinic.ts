@@ -12,8 +12,14 @@
  */
 
 export const CLINIC = {
-  /** Legal + display name. Must match Google Business Profile EXACTLY. */
+  /** Display name used on the site, ZnanyLekarz and in copy. */
   name: 'WiseHealth',
+  /**
+   * The name on the Google Business Profile. Kept as schema `alternateName`
+   * so Google reconciles the site with the GBP listing without renaming the
+   * GBP (a rename can trigger re-verification).
+   */
+  alternateName: 'WiseHealth Gabinet Psychiatryczno-Psychologiczny',
   legalName: 'CEREDUO Sp. z o.o.',
   krs: '0001042565',
   url: 'https://wisehealth.pl',
@@ -21,14 +27,14 @@ export const CLINIC = {
   email: 'kontakt@wisehealth.pl',
 
   /**
-   * Telephone. Intentionally empty until the clinic publishes a number.
-   *
-   * NOTE: an empty `telephone` is omitted from JSON-LD rather than emitted as
-   * `""` — Google treats an empty string as a malformed value. See
-   * `buildLocalBusinessSchema()` below. Set this the moment a number exists;
-   * every schema block and the contact page pick it up automatically.
+   * Reception phone (owner-confirmed 2026-10-07). E.164 for schema + tel:
+   * links, display form for humans. Online booking (MyDr) stays the PRIMARY
+   * path — render the phone as a secondary option, never as the main CTA.
+   * Change it here only; schema, /kontakt, footer, landings and the SEO
+   * checks all derive from these two values.
    */
-  telephone: '',
+  telephone: '+48459160431',
+  telephoneDisplay: '+48 459 160 431',
 
   address: {
     streetAddress: 'ul. Szlak 38/16',
@@ -38,22 +44,39 @@ export const CLINIC = {
     addressCountry: 'PL',
   },
 
+  /**
+   * Building at ul. Szlak 38: OpenStreetMap geocode and the Google Business
+   * Profile pin agree (50.071587, 19.938935). The previous value
+   * (50.0694, 19.9385) was ~240 m south. Pinned here, verified in CI.
+   */
   geo: {
-    latitude: 50.0694,
-    longitude: 19.9385,
+    latitude: 50.07155,
+    longitude: 19.93889,
   },
 
   openingHours: {
     days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] as const,
     opens: '09:00',
     closes: '20:00',
+    /** Human form, owner-confirmed 2026-10-07 (reception answers the phone). */
+    display: 'pn–pt 9:00–20:00',
   },
+
+  /** Directions without a third-party embed (no Google iframe, no CSP hole). */
+  mapsUrl:
+    'https://www.google.com/maps/search/?api=1&query=WiseHealth%2C+ul.+Szlak+38%2F16%2C+31-153+Krak%C3%B3w',
 
   priceRange: '200–300 PLN',
   currency: 'PLN',
 } as const;
 
 export interface Specialist {
+  /**
+   * schema.org type. `Physician` only for licensed physicians (lek. med.);
+   * psychologists/psychotherapists are `Person` — labelling them Physician
+   * is a false medical claim in structured data.
+   */
+  schemaType: 'Physician' | 'Person';
   /** Full name as it appears on external directories — keep consistent. */
   name: string;
   /** Schema.org honorific/title prefix used in the rendered heading. */
@@ -74,6 +97,7 @@ export interface Specialist {
 export const SPECIALISTS: Specialist[] = [
   {
     name: 'Agnieszka Krawczyk',
+    schemaType: 'Physician',
     displayName: 'lek. med. Agnieszka Krawczyk',
     jobTitle: 'Współzałożycielka, lekarz, specjalista psychiatra',
     specialty: 'Psychiatria',
@@ -84,6 +108,7 @@ export const SPECIALISTS: Specialist[] = [
   },
   {
     name: 'Marcin Pawlus',
+    schemaType: 'Person',
     displayName: 'mgr Marcin Pawlus',
     jobTitle: 'Współzałożyciel, psycholog, psychoterapeuta',
     specialty: 'Psychologia i psychoterapia',
@@ -144,7 +169,10 @@ export function buildLocalBusinessSchema(): Record<string, unknown> {
     '@type': ['MedicalClinic', 'LocalBusiness'],
     '@id': `${CLINIC.url}/#clinic`,
     name: CLINIC.name,
+    alternateName: CLINIC.alternateName,
     legalName: CLINIC.legalName,
+    telephone: CLINIC.telephone,
+    hasMap: CLINIC.mapsUrl,
     url: CLINIC.url,
     image: CLINIC.logo,
     logo: CLINIC.logo,
@@ -178,18 +206,12 @@ export function buildLocalBusinessSchema(): Record<string, unknown> {
       description: s.description,
     })),
     employee: SPECIALISTS.map((s) => ({
-      '@type': 'Physician',
+      '@type': s.schemaType,
       name: s.displayName,
       jobTitle: s.jobTitle,
       sameAs: s.sameAs,
     })),
   };
-
-  // Only emit telephone when one actually exists — an empty string is invalid
-  // structured data and suppresses the rich result entirely.
-  if (CLINIC.telephone) {
-    schema.telephone = CLINIC.telephone;
-  }
 
   return schema;
 }

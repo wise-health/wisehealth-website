@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import MyDrBookingButton from '@site/src/components/MyDrBookingButton';
+import ClinicPhone from '@site/src/components/ClinicPhone';
 import JsonLd from '@site/src/components/JsonLd';
 import {
   CLINIC,
@@ -129,7 +130,7 @@ export default function LandingPage({
               <MyDrBookingButton />
               <p style={{ fontSize: '0.9rem', marginTop: '1.5rem', opacity: 0.8 }}>
                 Gabinet: {CLINIC.address.streetAddress}, {CLINIC.address.postalCode}{' '}
-                {CLINIC.address.addressLocality} · E-mail:{' '}
+                {CLINIC.address.addressLocality} · Recepcja: <ClinicPhone /> · E-mail:{' '}
                 <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
               </p>
               <p style={{ fontSize: '0.9rem', color: '#ff6b6b', fontWeight: 'bold' }}>

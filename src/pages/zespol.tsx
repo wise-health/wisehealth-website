@@ -20,10 +20,13 @@ import {
 function buildTeamSchema(): Record<string, unknown>[] {
   return SPECIALISTS.map((specialist) => ({
     '@context': 'https://schema.org',
-    '@type': 'Physician',
+    '@type': specialist.schemaType,
     name: specialist.displayName,
     jobTitle: specialist.jobTitle,
-    medicalSpecialty: specialist.specialty,
+    // medicalSpecialty is only defined on Physician; a Person gets knowsAbout.
+    ...(specialist.schemaType === 'Physician'
+      ? { medicalSpecialty: specialist.specialty }
+      : { knowsAbout: specialist.specialty }),
     ...(specialist.image ? { image: specialist.image } : {}),
     sameAs: specialist.sameAs,
     worksFor: { '@id': `${CLINIC.url}/#clinic` },

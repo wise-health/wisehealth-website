@@ -34,9 +34,27 @@ REQUIRED_PAGES = [
     "oferta",
 ]
 
+# --- Clinic identity (NAP). Single truth lives in src/data/clinic.ts; these
+# pins make CI fail if the rendered site ever drifts from it.
+EXPECTED_PHONE = "+48459160431"           # E.164, owner-confirmed 2026-10-07
+EXPECTED_GEO = (50.07155, 19.93889)       # OSM + GBP pin for ul. Szlak 38
+MAX_GEO_DRIFT_M = 30
+REPO = Path(__file__).resolve().parent.parent
+
+# Strings that must never ship anywhere in the build: the template's fake
+# phone, unfilled legal placeholders, "no phone" copy that contradicts the
+# real number.
+FORBIDDEN_STRINGS = [
+    "123 456 789",
+    "+48123456789",
+    "[do uzupełnienia]",
+    "brak infolinii",
+]
+
 # Pages that must carry the clinic entity, so Google builds ONE business node.
 NEEDS_CLINIC_SCHEMA = [
     "",
+    "kontakt",
     "psychiatra-krakow",
     "psycholog-krakow",
     "psychiatra-online",
@@ -65,6 +83,16 @@ NEEDS_BOOKING_CTA = [
     "cennik",
     "oferta",
     "kontakt",
+]
+
+# Pages where a patient must be able to reach a human: tel: link present.
+NEEDS_PHONE_LINK = [
+    "kontakt",
+    "faq",
+    "psychiatra-krakow",
+    "psycholog-krakow",
+    "psychiatra-online",
+    "leczenie-depresji-krakow",
 ]
 
 # Medical (YMYL) pages must always surface the emergency route. Non-negotiable:
@@ -140,6 +168,13 @@ def meta(html: str, name: str) -> str | None:
         html,
     )
     return m.group(1) if m else None
+
+
+def distance_m(a: tuple[float, float], b: tuple[float, float]) -> float:
+    from math import asin, cos, radians, sin, sqrt
+    lat1, lon1, lat2, lon2 = map(radians, (*a, *b))
+    h = sin((lat2 - lat1) / 2) ** 2 + cos(lat1) * cos(lat2) * sin((lon2 - lon1) / 2) ** 2
+    return 2 * 6_371_000 * asin(sqrt(h))
 
 
 def visible_text(html: str) -> str:
@@ -218,10 +253,38 @@ for slug in REQUIRED_PAGES:
             clinic = next(n for n in nodes if "MedicalClinic" in types_of(n))
             if clinic.get("@id") != "https://wisehealth.pl/#clinic":
                 fail(f"{label} clinic @id is {clinic.get('@id')!r}, expected the shared '#clinic' node")
-            elif "telephone" in clinic and not clinic["telephone"]:
-                fail(f"{label} emits an empty telephone — omit the field instead")
             else:
                 ok("MedicalClinic schema (shared @id)")
+            # Phone and geo are checked independently so one defect can never
+            # hide the other.
+            if clinic.get("telephone") != EXPECTED_PHONE:
+                fail(f"{label} clinic telephone is {clinic.get('telephone')!r}, expected {EXPECTED_PHONE}")
+            else:
+                ok("clinic telephone")
+            geo = clinic.get("geo") or {}
+            try:
+                drift = distance_m(EXPECTED_GEO, (float(geo["latitude"]), float(geo["longitude"])))
+            except (KeyError, TypeError, ValueError):
+                fail(f"{label} clinic has no usable geo")
+            else:
+                if drift > MAX_GEO_DRIFT_M:
+                    fail(f"{label} clinic geo is {drift:.0f} m from the pinned location (>{MAX_GEO_DRIFT_M} m)")
+                else:
+                    ok(f"geo within {drift:.0f} m of pin")
+
+    # Physician is a licensed-doctor claim: only "lek." holders may carry it.
+    for node in nodes:
+        if "Physician" in types_of(node) and "lek." not in str(node.get("name", "")):
+            fail(f"{label} types {node.get('name')!r} as Physician — not a physician (use Person)")
+        for emp in node.get("employee", []) if isinstance(node.get("employee"), list) else []:
+            if "Physician" in types_of(emp) and "lek." not in str(emp.get("name", "")):
+                fail(f"{label} clinic employee {emp.get('name')!r} typed Physician — not a physician")
+
+    if slug in NEEDS_PHONE_LINK:
+        if f'href="tel:{EXPECTED_PHONE}"' not in html:
+            fail(f"{label} has no tel:{EXPECTED_PHONE} link")
+        else:
+            ok("phone link")
 
     if slug in NEEDS_FAQ_SCHEMA:
         if "FAQPage" not in all_types:
@@ -266,13 +329,58 @@ for slug in REQUIRED_PAGES:
         else:
             ok("crisis info")
 
-    if slug in NEEDS_CLINIC_SCHEMA and slug != "":
+    if slug in NEEDS_CLINIC_SCHEMA and slug not in ("", "kontakt"):
         if words < MIN_LANDING_WORDS:
             fail(f"{label} renders only {words} words (<{MIN_LANDING_WORDS}) — too thin to rank")
         else:
             ok(f"substantive copy ({words} words)")
 
     print()
+
+# --- whole-build sweeps -------------------------------------------------------
+print("whole build")
+html_files = sorted(BUILD.rglob("*.html"))
+text_files = html_files + [p for p in (BUILD / "llms.txt",) if p.is_file()]
+hits = [
+    (s, str(p.relative_to(BUILD)))
+    for p in text_files
+    for s in FORBIDDEN_STRINGS
+    if s in p.read_text(encoding="utf-8", errors="replace")
+]
+if hits:
+    for s, where in hits[:20]:
+        fail(f"forbidden string {s!r} in {where}")
+else:
+    ok(f"no forbidden strings in {len(text_files)} files")
+
+# Every iframe must be allowed by the CSP frame-src, or it renders as a
+# blocked empty box in production (this is how the /kontakt map died).
+netlify = (REPO / "netlify.toml").read_text(encoding="utf-8")
+csp = re.search(r'Content-Security-Policy\s*=\s*"([^"]+)"', netlify)
+frame_src = []
+if csp:
+    m = re.search(r"frame-src([^;]*)", csp.group(1))
+    frame_src = m.group(1).split() if m else []
+blocked = set()
+for p in html_files:
+    for src in re.findall(r'<iframe[^>]+src="(https?://[^"/]+)', p.read_text(encoding="utf-8")):
+        if not any(src == allowed.rstrip("/") for allowed in frame_src):
+            blocked.add((src, str(p.relative_to(BUILD))))
+if blocked:
+    for src, where in sorted(blocked):
+        fail(f"iframe {src} in {where} is not allowed by CSP frame-src {frame_src}")
+else:
+    ok("all iframes allowed by CSP")
+
+# Unknown URLs must 404. A `/* -> /index.html 200` rewrite turns every dead
+# link into a soft-404 (homepage served with 200).
+if re.search(r'from\s*=\s*"/\*"[^\[]*status\s*=\s*200', netlify, re.S):
+    fail("netlify.toml rewrites /* to 200 — unknown URLs become soft-404s")
+elif not (BUILD / "404.html").is_file():
+    fail("build/404.html missing — Netlify would serve its generic 404")
+else:
+    ok("real 404s (no catch-all rewrite, 404.html present)")
+print()
 
 # --- sitemap / robots ------------------------------------------------------
 print("sitemap.xml")
