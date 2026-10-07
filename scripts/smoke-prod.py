@@ -52,7 +52,7 @@ def fetch(url: str) -> tuple[int, dict, str]:
 
 def jsonld(html: str) -> list[dict]:
     out: list[dict] = []
-    for raw in re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.S):
+    for raw in re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.DOTALL):
         try:
             d = json.loads(raw)
         except json.JSONDecodeError:

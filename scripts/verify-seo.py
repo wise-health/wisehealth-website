@@ -139,7 +139,7 @@ def extract_jsonld(html: str) -> list[dict]:
     nothing and reports every page as missing its schema.
     """
     blocks = re.findall(
-        r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.S
+        r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', html, re.DOTALL
     )
     parsed = []
     for raw in blocks:
@@ -184,9 +184,9 @@ def visible_text(html: str) -> str:
     Checking rendered text rather than source guards against the failure mode
     where a page builds and returns 200 but ships an empty or stub body.
     """
-    stripped = re.sub(r"<script.*?</script>", " ", html, flags=re.S)
-    stripped = re.sub(r"<style.*?</style>", " ", stripped, flags=re.S)
-    main = re.search(r"<main.*?</main>", stripped, re.S)
+    stripped = re.sub(r"<script.*?</script>", " ", html, flags=re.DOTALL)
+    stripped = re.sub(r"<style.*?</style>", " ", stripped, flags=re.DOTALL)
+    main = re.search(r"<main.*?</main>", stripped, re.DOTALL)
     body = main.group(0) if main else stripped
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", body))).strip()
 
@@ -209,7 +209,7 @@ for slug in REQUIRED_PAGES:
     html = path.read_text(encoding="utf-8")
 
     # --- title -------------------------------------------------------------
-    title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.S)
+    title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.DOTALL)
     if not title_match:
         fail(f"{label} has no <title>")
     else:
@@ -378,7 +378,7 @@ else:
 
 # Unknown URLs must 404. A `/* -> /index.html 200` rewrite turns every dead
 # link into a soft-404 (homepage served with 200).
-if re.search(r'from\s*=\s*"/\*"[^\[]*status\s*=\s*200', netlify, re.S):
+if re.search(r'from\s*=\s*"/\*"[^\[]*status\s*=\s*200', netlify, re.DOTALL):
     fail("netlify.toml rewrites /* to 200 — unknown URLs become soft-404s")
 elif not (BUILD / "404.html").is_file():
     fail("build/404.html missing — Netlify would serve its generic 404")
