@@ -306,10 +306,13 @@ for slug in REQUIRED_PAGES:
                     ok(f"FAQPage schema ({len(questions)} questions)")
 
     # --- Open Graph --------------------------------------------------------
+    og_image = meta(html, "og:image") or ""
     if not meta(html, "og:title"):
         fail(f"{label} has no og:title")
+    elif not og_image or "docusaurus-social-card" in og_image:
+        fail(f"{label} og:image is {og_image or 'missing'!r} — template card, not WiseHealth")
     else:
-        ok("open graph")
+        ok("open graph (branded og:image)")
 
     # --- rendered copy -----------------------------------------------------
     # A page can build cleanly and return 200 while shipping an empty shell;

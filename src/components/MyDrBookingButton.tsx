@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import ClinicPhone from '@site/src/components/ClinicPhone';
+import { CLINIC } from '@site/src/data/clinic';
 
 export interface MyDrBookingButtonProps {
   label?: string;
@@ -8,6 +10,13 @@ export interface MyDrBookingButtonProps {
   speciality?: string;
   visitKind?: string;
   evisit?: boolean;
+  /**
+   * Show the phone/e-mail line under the button. On by default: the widget
+   * runs inside a cross-origin iframe, so the page cannot detect when it fails
+   * (2026-10-07 it rendered blank on a MyDr 401) — a visible human fallback is
+   * the only reliable one.
+   */
+  showFallback?: boolean;
 }
 
 /**
@@ -24,6 +33,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
   speciality = '',
   visitKind = 'Prywatna',
   evisit = true,
+  showFallback = true,
 }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const scriptLoadedRef = useRef(false);
@@ -93,6 +103,16 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // Rapid repeat clicks stacked one MyDr modal per click (E0 recon: 3 clicks
+    // = 3 iframes, the hidden ones reappearing later). Disabling the button
+    // briefly stops the follow-up clicks reaching the plugin at all; the
+    // current click has already been dispatched.
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    window.setTimeout(() => {
+      btn.disabled = false;
+    }, 2000);
+
     // Fallback: if widget doesn't work, open MyDr directly
     if (!scriptLoadedRef.current || typeof window.PatientsPlugin === 'undefined') {
       e.preventDefault();
@@ -101,10 +121,11 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
   };
 
   return (
+    <>
     <button
       ref={buttonRef}
       type="button"
-      className={`btn-mydr-pp button button--lg ${variantClass} ${className}`.trim()}
+      className={`btn-mydr-pp button button--lg plausible-event-name=Booking+Click ${variantClass} ${className}`.trim()}
       data-doctor={doctor}
       data-speciality={speciality}
       data-visitkind={visitKind}
@@ -117,6 +138,13 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
     >
       {label}
     </button>
+    {showFallback && (
+      <p className="booking-fallback">
+        Problem z rejestracją online? Zadzwoń: <ClinicPhone /> lub napisz:{' '}
+        <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
+      </p>
+    )}
+    </>
   );
 };
 

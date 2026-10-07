@@ -132,7 +132,6 @@ const config: Config = {
             '/blog/tags/**',
             '/blog/authors/**',
             '/blog/archive',
-            '/markdown-page',
             '/404',
           ],
           filename: 'sitemap.xml',
@@ -143,7 +142,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/wisehealth-social-card.jpg',
     colorMode: {
       defaultMode: 'light',
       disableSwitch: false,

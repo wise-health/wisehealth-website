@@ -791,42 +791,77 @@ hr {
   );
 }
 
-/* Cookie Banner */
+/* Cookie notice — compact, never wider than the viewport, never covers the
+   fold on mobile (old banner: 221 of 844 px, overflowing). */
 .cookie-banner {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--ifm-color-emphasis-100);
-  border-top: 1px solid var(--ifm-color-emphasis-300);
-  padding: 1rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  max-width: 44rem;
+  margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   z-index: 9999;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .cookie-banner__content {
-  flex: 1;
-  font-size: 0.9rem;
-}
-
-.cookie-banner__content p {
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
-.cookie-banner__actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+.cookie-banner__content {
+  flex-basis: 0;
 }
 
-@media (max-width: 768px) {
-  .cookie-banner {
-    flex-direction: column;
-    text-align: center;
+/* Beats the global mobile `.button { width: 100% }` rule, which otherwise
+   squeezes the text column to one character per line (2150 px tall notice). */
+.cookie-banner .cookie-banner__button {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+/* Wide tables (price list) scroll inside their own box on small screens
+   instead of widening the whole page. */
+@media (max-width: 996px) {
+  .table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
+
+/* Mobile: the booking CTA lives in the top bar instead of hiding in the
+   hamburger menu, so it is above the fold on every page. */
+@media (max-width: 996px) {
+  .navbar__items--right .navbar-booking-button {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .navbar-sidebar .navbar-booking-button {
+    display: none !important;
+  }
+}
+
+/* Booking fallback line under every MyDr button. */
+.booking-fallback {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+

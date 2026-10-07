@@ -67,7 +67,7 @@ export default function KontaktPage(): React.ReactNode {
                     Najszybszym sposobem umówienia wizyty jest skorzystanie z systemu rejestracji online
                     MyDr. W kilka minut wybierzesz specjalistę, termin i formę konsultacji.
                   </p>
-                  <MyDrBookingButton className="margin-top--md" />
+                  <MyDrBookingButton className="margin-top--md" showFallback={false} />
                   <p className="text--secondary margin-top--md">
                     Wolisz porozmawiać? Recepcja: <ClinicPhone /> ({CLINIC.openingHours.display}).
                   </p>
