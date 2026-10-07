@@ -103,6 +103,25 @@ def main() -> int:
         st, _, _ = fetch(base + path)
         check(st == 404, f"{path} → {st} (want 404)")
 
+    print("\nbooking status function (netlify/functions/mydr-status.mjs)")
+    st, _, home = fetch(base + "/kontakt")
+    tok = re.search(r'data-token="([^"]+)"', home)
+    if not tok:
+        check(False, "booking button with data-token on /kontakt")
+    else:
+        st, _, body = fetch(f"{base}/api/mydr-status?token={tok.group(1)}")
+        try:
+            verdict = json.loads(body)
+        except json.JSONDecodeError:
+            verdict = {}
+        check(st == 200 and "up" in verdict,
+              f"/api/mydr-status deployed and answering ({st}, {verdict or body[:60]!r})")
+        # Informational: whether MyDr currently accepts the widget token.
+        print(f"  info  MyDr booking currently {'UP' if verdict.get('up') else 'DOWN'} "
+              f"(MyDr HTTP {verdict.get('status')}) — DOWN = patients see the call-reception dialog")
+    st, _, _ = fetch(base + "/api/mydr-status?token=not-a-token")
+    check(st == 400, f"/api/mydr-status rejects malformed tokens ({st})")
+
     print("\nheaders + llms.txt")
     st, hdr, _ = fetch(base + "/")
     csp = {k.lower(): v for k, v in hdr.items()}.get("content-security-policy", "")
