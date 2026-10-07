@@ -70,7 +70,10 @@ const config: Config = {
             attributes: {
               defer: 'true',
               'data-domain': process.env.PLAUSIBLE_DOMAIN,
-              src: 'https://plausible.io/js/script.js',
+              // tagged-events: counts clicks on elements carrying a
+              // `plausible-event-name=…` class (Booking Click, Phone Click).
+              // outbound-links: counts clicks through to MyDr/Google Maps.
+              src: 'https://plausible.io/js/script.tagged-events.outbound-links.js',
             },
           },
         ]
