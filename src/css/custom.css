@@ -865,3 +865,52 @@ hr {
   opacity: 0.85;
 }
 
+
+/* "Booking unavailable" dialog — replaces the blank MyDr window when MyDr
+   rejects the widget token or the plugin has not loaded yet. */
+.booking-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.booking-dialog {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 28rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.booking-dialog__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.booking-dialog .booking-dialog__call {
+  width: 100%;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.booking-dialog__meta {
+  font-size: 0.9rem;
+}
+
+.booking-dialog__emergency {
+  font-size: 0.9rem;
+  color: #c53030;
+  font-weight: 600;
+}
+
+.booking-dialog .booking-dialog__close {
+  width: auto;
+  margin-top: 0.25rem;
+}

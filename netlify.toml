@@ -11,6 +11,11 @@
   # Node version
   environment = { NODE_VERSION = "20" }
 
+# Serverless functions: /api/mydr-status (MyDr booking health probe).
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Environment variables (set these in Netlify UI for security)
 # Required:
 # - MYDR_BOOKING_URL: URL for MyDr booking system
