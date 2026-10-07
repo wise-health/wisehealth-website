@@ -1,0 +1,10 @@
+# Fingerprint-scoped exceptions ONLY. Each line = one finding in one commit.
+#
+# The MyDr booking-widget token (`data-token` JWT) is PUBLIC BY DESIGN: the
+# widget cannot work without shipping it in the page HTML, and it is served on
+# every page of wisehealth.pl. It identifies the clinic's widget; it is not the
+# MyDr API client_secret. Re-introducing it in a NEW commit/line produces a new
+# fingerprint and fails CI on purpose — review it, then add the new line here.
+b75fe7211efb875283fb19c4b40963e8b97ec0e7:src/components/MyDrBookingButton.tsx:jwt:107
+ca2cfdd6a52dab375f312a24cab7ee87a6727ed0:static/test-mydr.html:jwt:47
+ca2cfdd6a52dab375f312a24cab7ee87a6727ed0:static/test-widget-debug.html:jwt:74

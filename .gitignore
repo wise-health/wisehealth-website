@@ -19,3 +19,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /build
+
+# Secrets — never in git (see SECURITY.md). Belt-and-braces with the
+# pre-commit hook + CI forbidden-filename check.
+CREDENTIALS*
+credentials*
+.env
+.env.*
+!.env.example
+*.pem
+*.key
