@@ -1,6 +1,8 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import ClinicPhone from '@site/src/components/ClinicPhone';
+import { CLINIC } from '@site/src/data/clinic';
 
 export default function PolitykaPrywatnosciPage(): React.ReactNode {
   return (
@@ -10,7 +12,7 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
       <main className="container margin-vert--lg">
         <Heading as="h1">Polityka prywatności</Heading>
         <p className="text--secondary margin-bottom--lg">
-          Ostatnia aktualizacja: {new Date().toLocaleDateString('pl-PL')}
+          Ostatnia aktualizacja: 7 października 2026 r.
         </p>
 
         <section className="margin-top--lg">
@@ -46,7 +48,7 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
                 <li>Adres e-mail</li>
                 <li>Numer telefonu</li>
                 <li>Dane dotyczące rezerwacji wizyt (termin, rodzaj wizyty, wybrany specjalista)</li>
-                <li>Dane techniczne (adres IP, typ przeglądarki, system operacyjny)</li>
+                <li>Dane techniczne (adres IP, typ przeglądarki, system operacyjny) – zapisywane automatycznie w logach serwera przez dostawcę hostingu (Netlify) w celu wyświetlenia strony i zapewnienia jej bezpieczeństwa</li>
                 <li>Dane medyczne – w zakresie niezbędnym do świadczenia usług medycznych (zbierane w systemie MyDr)</li>
               </ul>
             </div>
@@ -64,7 +66,6 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
                 <li>Kontakt z pacjentem (potwierdzenia wizyt, przypomnienia)</li>
                 <li>Prowadzenie dokumentacji medycznej zgodnie z obowiązującymi przepisami</li>
                 <li>Rozpatrywanie reklamacji i zapytań</li>
-                <li>Analiza statystyczna ruchu na stronie (dane anonimowe)</li>
                 <li>Realizacja obowiązków prawnych ciążących na administratorze</li>
               </ul>
             </div>
@@ -94,7 +95,7 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
                 </li>
                 <li>
                   <strong>Art. 6 ust. 1 lit. f) RODO</strong> – prawnie uzasadniony interes administratora
-                  (np. analiza statystyczna)
+                  (zapewnienie bezpieczeństwa strony, obsługa zapytań, dochodzenie i obrona przed roszczeniami)
                 </li>
               </ul>
             </div>
@@ -132,12 +133,18 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
               </p>
               <ul>
                 <li>
-                  <strong>Dokumentacja medyczna:</strong> 20 lat od ostatniego wpisu (zgodnie z ustawą
-                  o prawach pacjenta i Rzeczniku Praw Pacjenta)
+                  <strong>Dokumentacja medyczna:</strong> 20 lat, licząc od końca roku kalendarzowego,
+                  w którym dokonano ostatniego wpisu, z wyjątkami przewidzianymi w art. 29 ust. 1 ustawy
+                  o prawach pacjenta i Rzeczniku Praw Pacjenta (np. skierowania niezrealizowane – 5 lat).
                 </li>
                 <li>
-                  <strong>Dane dotyczące rezerwacji i płatności:</strong> 5 lat (dla celów podatkowych
-                  i rachunkowych)
+                  <strong>Dane dotyczące rezerwacji i rozliczeń:</strong> 5 lat, licząc od końca roku
+                  kalendarzowego, w którym upłynął termin płatności podatku, oraz do czasu przedawnienia
+                  ewentualnych roszczeń.
+                </li>
+                <li>
+                  <strong>Korespondencja (e-mail, telefon):</strong> do czasu załatwienia sprawy,
+                  a następnie do upływu terminu przedawnienia roszczeń.
                 </li>
                 <li>
                   <strong>Dane w celach marketingowych:</strong> do czasu wycofania zgody lub sprzeciwu
@@ -177,16 +184,23 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
           <div className="card">
             <div className="card__body">
               <p>
-                Nasza strona wykorzystuje pliki cookies w celu:
+                Strona nie używa plików cookies analitycznych ani reklamowych. Korzystamy wyłącznie
+                z mechanizmów niezbędnych do jej działania:
               </p>
               <ul>
-                <li>Zapewnienia prawidłowego działania strony</li>
-                <li>Zapamiętywania preferencji użytkownika</li>
-                <li>Analizy ruchu na stronie (np. Google Analytics)</li>
+                <li>
+                  <code>wh-notice-dismissed</code> (pamięć lokalna przeglądarki) – zapamiętuje, że
+                  zamknięto komunikat informacyjny na dole strony;
+                </li>
+                <li>
+                  moduł rezerwacji MyDr – okno rezerwacji wyświetlane jest z serwisu MyDr
+                  (plugin.mydr.pl); po jego otwarciu i zalogowaniu MyDr może zapisywać na urządzeniu
+                  dane niezbędne do założenia konta i umówienia wizyty, zgodnie z polityką prywatności MyDr.
+                </li>
               </ul>
               <p>
-                Możesz zarządzać ustawieniami plików cookies w swojej przeglądarce. Wyłączenie cookies
-                może wpłynąć na funkcjonalność strony.
+                Możesz usunąć te dane w ustawieniach przeglądarki; może to uniemożliwić umówienie
+                wizyty online.
               </p>
             </div>
           </div>
@@ -201,6 +215,12 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
               </p>
               <p>
                 <strong>E-mail:</strong> <a href="mailto:kontakt@wisehealth.pl">kontakt@wisehealth.pl</a><br />
+                <strong>Telefon (recepcja):</strong> <ClinicPhone /> ({CLINIC.openingHours.display})
+              </p>
+              <p>
+                Prawo do wniesienia skargi przysługuje do Prezesa Urzędu Ochrony Danych Osobowych
+                (ul. Stawki 2, 00-193 Warszawa). Szczegółowe informacje dla pacjentów, w tym o obowiązku
+                podania danych i braku profilowania, znajdziesz w <a href="/rodo">klauzuli informacyjnej RODO</a>.
               </p>
             </div>
           </div>

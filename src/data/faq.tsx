@@ -136,7 +136,7 @@ export const FAQ_SECTIONS: FaqSection[] = [
       {
         question: 'Czy wizyty są refundowane przez NFZ?',
         answerText:
-          'WiseHealth to prywatna poradnia, więc wizyty nie są refundowane przez NFZ. Po wizycie otrzymasz fakturę, którą możesz odliczyć od podatku w ramach ulgi rehabilitacyjnej lub przedstawić w prywatnym ubezpieczeniu zdrowotnym, jeśli Twoja polisa to obejmuje.',
+          'WiseHealth to prywatna poradnia, więc wizyty nie są refundowane przez NFZ. Po wizycie otrzymasz dokument potwierdzający płatność, który możesz przedstawić ubezpieczycielowi, jeśli Twoja prywatna polisa obejmuje takie świadczenia. O ewentualnych ulgach podatkowych zdecyduj po konsultacji z doradcą podatkowym lub urzędem skarbowym.',
       },
       {
         question: 'Ile kosztuje wizyta u psychiatry w WiseHealth?',

@@ -46,13 +46,13 @@ export default function RODOPage(): React.ReactNode {
               
               <Heading as="h4">a) Udzielanie świadczeń zdrowotnych</Heading>
               <ul>
-                <li><strong>Podstawa prawna:</strong> Art. 9 ust. 2 lit. h) RODO w zw. z ustawą o prawach pacjenta i Rzeczniku Praw Pacjenta</li>
+                <li><strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. c) oraz art. 9 ust. 2 lit. h) RODO w zw. z ustawą z dnia 15 kwietnia 2011 r. o działalności leczniczej oraz ustawą z dnia 6 listopada 2008 r. o prawach pacjenta i Rzeczniku Praw Pacjenta</li>
                 <li>Przeprowadzenie badania, postawienie diagnozy, udzielenie pomocy medycznej</li>
               </ul>
 
               <Heading as="h4">b) Prowadzenie dokumentacji medycznej</Heading>
               <ul>
-                <li><strong>Podstawa prawna:</strong> Art. 6 ust. 1 lit. c) RODO – obowiązek prawny wynikający z przepisów o prawach pacjenta</li>
+                <li><strong>Podstawa prawna:</strong> art. 6 ust. 1 lit. c) i art. 9 ust. 2 lit. h) RODO w zw. z art. 24 ustawy o prawach pacjenta i Rzeczniku Praw Pacjenta oraz przepisami wykonawczymi dotyczącymi dokumentacji medycznej</li>
                 <li>Sporządzanie i przechowywanie dokumentacji medycznej zgodnie z obowiązującymi przepisami</li>
               </ul>
 
@@ -119,22 +119,26 @@ export default function RODOPage(): React.ReactNode {
               </p>
               <ul>
                 <li>
-                  <strong>Dokumentacja medyczna:</strong> 20 lat licząc od końca roku kalendarzowego,
-                  w którym dokonano ostatniego wpisu (zgodnie z art. 29 ustawy o prawach pacjenta)
+                  <strong>Dokumentacja medyczna:</strong> 20 lat, licząc od końca roku kalendarzowego,
+                  w którym dokonano ostatniego wpisu, z wyjątkami przewidzianymi w art. 29 ust. 1 ustawy
+                  o prawach pacjenta i Rzeczniku Praw Pacjenta (np. skierowania niezrealizowane – 5 lat).
                 </li>
                 <li>
-                  <strong>Dokumentacja obrazowa (zdjęcia RTG, wyniki badań):</strong> 10 lat
+                  <strong>Dane dotyczące rezerwacji i rozliczeń:</strong> 5 lat, licząc od końca roku
+                  kalendarzowego, w którym upłynął termin płatności podatku, oraz do czasu przedawnienia
+                  ewentualnych roszczeń.
                 </li>
                 <li>
-                  <strong>Skierowania:</strong> 5 lat
+                  <strong>Korespondencja (e-mail, telefon):</strong> do czasu załatwienia sprawy,
+                  a następnie do upływu terminu przedawnienia roszczeń.
                 </li>
                 <li>
                   <strong>Zgody marketingowe:</strong> do momentu wycofania zgody
                 </li>
               </ul>
               <p>
-                Po upływie powyższych okresów dokumentacja jest archiwizowana lub niszczona zgodnie
-                z obowiązującymi przepisami.
+                Po upływie tych okresów dokumentacja medyczna jest niszczona w sposób uniemożliwiający
+                identyfikację pacjenta, którego dotyczyła.
               </p>
             </div>
           </div>
@@ -234,12 +238,6 @@ export default function RODOPage(): React.ReactNode {
                 <strong>Telefon (recepcja):</strong> <ClinicPhone /> ({CLINIC.openingHours.display})<br />
                 <strong>Adres do korespondencji:</strong> {CLINIC.legalName}, gabinet WiseHealth,{' '}
                 {CLINIC.address.streetAddress}, {CLINIC.address.postalCode} {CLINIC.address.addressLocality}
-              </p>
-              <p className="margin-top--md">
-                <em>
-                  Potwierdzam, że zapoznałem/am się z powyższą klauzulą informacyjną i rozumiem sposób
-                  przetwarzania moich danych osobowych.
-                </em>
               </p>
             </div>
           </div>
