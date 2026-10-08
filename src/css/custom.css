@@ -1180,6 +1180,11 @@ section {
   section {
     padding: 2.5rem 0;
   }
+
+  main > section.container.margin-vert--xl {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
 }
 
 img {
