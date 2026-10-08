@@ -98,7 +98,7 @@ function ServiceCard({ title, description, image }: { title: string; description
   return (
     <div className="wh-service">
       {image && (
-        <img className="wh-service__art" src={image} alt="" width={88} height={88} decoding="async" />
+        <img className="wh-service__art" src={image} alt="" width={120} height={120} decoding="async" />
       )}
       <h3>{title}</h3>
       <p>{description}</p>

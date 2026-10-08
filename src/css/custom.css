@@ -430,9 +430,9 @@ main > section.container.margin-vert--xl {
 
 .wh-service__art {
   display: block;
-  width: 88px;
-  height: 88px;
-  margin: -0.5rem 0 0.75rem -0.5rem;
+  width: 120px;
+  height: 120px;
+  margin: -0.75rem 0 0.5rem -0.75rem;
   border-radius: 0;
   opacity: 0.85;
 }
@@ -782,7 +782,12 @@ main table {
   letter-spacing: 0.08em;
   border: 0;
   border-bottom: 1px solid var(--wh-line);
-  white-space: nowrap;
+}
+
+@media (min-width: 997px) {
+  .table th {
+    white-space: nowrap;
+  }
 }
 
 .table td {
@@ -797,6 +802,7 @@ main table {
 .table td:first-child {
   color: var(--wh-ink);
   font-weight: 600;
+  min-width: 10.5rem;
 }
 
 .table td:nth-child(3) {
@@ -1037,6 +1043,11 @@ main table {
 
   .wh-service {
     padding: 1.5rem 1.25rem;
+  }
+
+  .wh-service__art {
+    width: 96px;
+    height: 96px;
   }
 
   .wh-why {
