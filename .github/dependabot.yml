@@ -17,6 +17,11 @@ updates:
         patterns:
           - "react"
           - "react-dom"
+    ignore:
+      # TypeScript 7 removed `baseUrl`, which Docusaurus 3.x's @docusaurus/tsconfig
+      # still sets (TS5102 -> typecheck fails). Re-enable once Docusaurus supports TS 7.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
