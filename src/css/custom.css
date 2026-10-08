@@ -776,6 +776,7 @@ main .card.margin-bottom--md + :not(.card) {
 }
 
 /* ---------- Tables ---------- */
+
 .table,
 main table {
   width: 100%;
@@ -1342,4 +1343,77 @@ article.margin-bottom--xl,
 .booking-dialog .booking-dialog__close {
   width: auto;
   margin-top: 0.25rem;
+}
+
+/* Price table on phones: one stacked block per service instead of a 4-column
+   table that hid the price edge and the whole "Uwagi" column off-screen.
+   Order stays name -> duration -> price -> notes; ARIA roles in cennik.tsx keep
+   table semantics when display changes. */
+@media (max-width: 640px) {
+  .price-table,
+  .price-table tbody {
+    display: block;
+    overflow: visible;
+  }
+
+  .price-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .price-table tr,
+  .price-table tr:nth-child(2n) {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1rem;
+    row-gap: 0.375rem;
+    padding: 1.125rem 1.25rem;
+    background: var(--wh-surface);
+    border-bottom: 1px solid var(--wh-line);
+  }
+
+  .price-table tr:last-child {
+    border-bottom: 0;
+  }
+
+  /* one surface per service (the row), not a patchwork of cell boxes */
+  .price-table td,
+  .price-table td:first-child,
+  .price-table tbody tr:hover td {
+    display: block;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+    background: transparent;
+  }
+
+  .price-table td:nth-child(1) {
+    margin-bottom: 0.125rem;
+  }
+
+  .price-table td:nth-child(1) {
+    grid-column: 1 / -1;
+  }
+
+  .price-table td:nth-child(2) {
+    color: var(--wh-muted);
+    align-self: baseline;
+  }
+
+  .price-table td:nth-child(3) {
+    font-size: 1.25rem;
+    justify-self: end;
+    align-self: baseline;
+    white-space: nowrap;
+  }
+
+  .price-table td:nth-child(4) {
+    grid-column: 1 / -1;
+    color: var(--wh-muted);
+    font-size: 0.9rem;
+  }
 }

@@ -12,11 +12,11 @@ interface PriceRowProps {
 
 function PriceRow({ name, duration, price, notes }: PriceRowProps) {
   return (
-    <tr>
-      <td>{name}</td>
-      <td>{duration}</td>
-      <td>{price}</td>
-      <td>{notes}</td>
+    <tr role="row">
+      <td role="cell">{name}</td>
+      <td role="cell">{duration}</td>
+      <td role="cell">{price}</td>
+      <td role="cell">{notes}</td>
     </tr>
   );
 }
@@ -39,16 +39,16 @@ export default function CennikPage(): React.ReactNode {
             <Heading as="h2">Cennik wizyt</Heading>
           </div>
           <div className="card__body">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Usługa</th>
-                  <th>Czas trwania</th>
-                  <th>Cena (PLN)</th>
-                  <th>Uwagi</th>
+            <table className="table price-table" role="table">
+              <thead role="rowgroup">
+                <tr role="row">
+                  <th role="columnheader">Usługa</th>
+                  <th role="columnheader">Czas trwania</th>
+                  <th role="columnheader">Cena (PLN)</th>
+                  <th role="columnheader">Uwagi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody role="rowgroup">
                 <PriceRow
                   name="Pierwsza wizyta (konsultacja diagnostyczna + pierwsza wizyta)"
                   duration="ok. 45 min"
