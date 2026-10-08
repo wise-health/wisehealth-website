@@ -123,7 +123,7 @@ export default function LandingPage({
         ) : null}
 
         <section className="margin-top--xl margin-bottom--xl">
-          <div className="card" style={{ padding: '2rem' }}>
+          <div className="card wh-cta">
             <div className="card__body text--center">
               <Heading as="h2">{ctaHeading}</Heading>
               <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>{ctaBody}</p>
@@ -133,7 +133,7 @@ export default function LandingPage({
                 {CLINIC.address.addressLocality} · Recepcja: <ClinicPhone /> · E-mail:{' '}
                 <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
               </p>
-              <p style={{ fontSize: '0.9rem', color: '#ff6b6b', fontWeight: 'bold' }}>
+              <p className="wh-emergency">
                 W sytuacji nagłego zagrożenia życia lub zdrowia zgłoś się na SOR lub zadzwoń pod
                 numer 112.
               </p>

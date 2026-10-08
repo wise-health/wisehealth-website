@@ -203,7 +203,7 @@ export default function ZespolPage(): React.ReactNode {
           </div>
         </section>
         <section className="margin-top--xl margin-bottom--xl">
-          <div className="card" style={{ padding: '2rem' }}>
+          <div className="card wh-cta">
             <div className="card__body text--center">
               <Heading as="h2">Gotowy, żeby umówić wizytę?</Heading>
               <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>

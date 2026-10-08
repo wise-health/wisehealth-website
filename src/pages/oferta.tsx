@@ -118,7 +118,7 @@ export default function OfertaPage(): React.ReactNode {
         </section>
 
         <section className="margin-top--xl margin-bottom--xl">
-          <div className="card">
+          <div className="card wh-cta">
             <div className="card__body text--center">
               <Heading as="h2">Umów wizytę online</Heading>
               <p>
