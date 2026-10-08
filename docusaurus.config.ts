@@ -168,6 +168,11 @@ const config: Config = {
         alt: 'WiseHealth - Twoja droga do lepszego samopoczucia',
         src: 'img/logo-no-background.png',
         srcDark: 'img/logo-no-background.png',
+        // Explicit size (1500x452 source -> 166x50 as rendered by the theme).
+        // Without it, a page whose CSS fails to load on a flaky mobile
+        // connection shows the logo 1500 px wide; it also prevents layout shift.
+        width: 166,
+        height: 50,
       },
       items: [
         { to: '/oferta', label: 'Oferta', position: 'left' },
