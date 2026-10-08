@@ -568,11 +568,13 @@ a:hover {
 }
 
 /* MyDr Widget Button - ensure proper styling */
-.btn-mydr-pp {
+.btn-mydr-pp,
+.wh-booking-button {
   cursor: pointer !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 /* Responsive adjustments */
