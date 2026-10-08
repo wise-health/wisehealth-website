@@ -399,8 +399,10 @@ main li a:not(.button):hover,
 
 /* ---------- Homepage sections ---------- */
 main > section.container.margin-vert--xl {
-  margin-top: 1rem !important;
-  margin-bottom: 1rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
 }
 .wh-section-title {
   text-align: left;
@@ -435,10 +437,12 @@ main > section.container.margin-vert--xl {
   margin: -0.75rem 0 0.5rem -0.75rem;
   border-radius: 0;
   opacity: 0.85;
+  /* Shift the indigo line art toward the brand's teal ink. */
+  filter: hue-rotate(-80deg) saturate(0.85);
 }
 
 [data-theme='dark'] .wh-service__art {
-  filter: invert(1) hue-rotate(180deg);
+  filter: invert(1) hue-rotate(100deg) saturate(0.7);
   opacity: 0.75;
 }
 
