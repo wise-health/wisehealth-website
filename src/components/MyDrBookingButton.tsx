@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import ClinicPhone from '@site/src/components/ClinicPhone';
 import { CLINIC } from '@site/src/data/clinic';
 
@@ -243,7 +244,16 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
         <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
       </p>
     )}
-    {dialog && <BookingUnavailableDialog reason={dialog} onClose={() => setDialog(null)} />}
+    {/*
+      Portal to <body>: the dialog must never live inside page layout. A
+      transformed ancestor (e.g. `.card:hover { transform }`) turns
+      position:fixed into "fixed to that card", so the overlay snapped between
+      card-size and full-screen as the cursor moved — the 2026-10-08 flicker.
+    */}
+    {dialog && createPortal(
+      <BookingUnavailableDialog reason={dialog} onClose={() => setDialog(null)} />,
+      document.body,
+    )}
     </span>
   );
 };

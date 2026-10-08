@@ -18,6 +18,14 @@
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+
+/* The booking button renders its fallback line as a sibling (the button's
+   wrapper is display:contents): give it its own row, centred under the button. */
+.buttons :global(.booking-fallback) {
+  flex-basis: 100%;
+  text-align: center;
 }
