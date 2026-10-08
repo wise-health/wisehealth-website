@@ -332,6 +332,19 @@ main li a:not(.button):hover,
   color: var(--wh-muted);
 }
 
+/* The hero column is left-aligned: keep the booking button and its
+   fallback line on the column's left edge (index.module.css centres them). */
+.hero.wh-hero .wh-hero__cta {
+  justify-content: flex-start;
+  gap: 0.25rem 0;
+}
+
+.hero.wh-hero .wh-hero__cta .booking-fallback {
+  text-align: left;
+  color: var(--wh-muted);
+  max-width: 36rem;
+}
+
 .wh-hero__note {
   font-size: 0.875rem;
   margin: 1rem 0 0;

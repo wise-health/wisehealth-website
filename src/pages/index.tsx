@@ -68,7 +68,7 @@ function HomepageHeader() {
                 </div>
               </li>
             </ul>
-            <div className={styles.buttons}>
+            <div className={clsx(styles.buttons, 'wh-hero__cta')}>
               <MyDrBookingButton className="margin-top--md" />
             </div>
             <p className="wh-hero__note">
