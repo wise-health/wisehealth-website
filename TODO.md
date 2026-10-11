@@ -73,6 +73,7 @@ Use this checklist to track what needs to be done before going live.
 - [ ] Set build command: `npm run build`
 - [ ] Set publish directory: `build`
 - [ ] Set `NODE_VERSION=18` environment variable
+- [ ] Set `MYDR_WIDGET_TOKEN` environment variable (required; never commit the value)
 - [ ] Set `MYDR_BOOKING_URL` environment variable
 - [ ] Verify first deployment succeeds
 - [ ] Test staging URL

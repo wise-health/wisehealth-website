@@ -18,6 +18,9 @@
 
 # Environment variables (set these in Netlify UI for security)
 # Required:
+# - MYDR_WIDGET_TOKEN: MyDr PatientsPlugin data-token (from the MyDr EDM panel).
+#   NEVER commit it (public repo). Production builds FAIL without it —
+#   see config/mydr-widget-token.mjs.
 # - MYDR_BOOKING_URL: URL for MyDr booking system
 # Optional (for future API integration):
 # - MYDR_API_KEY: API key for MyDr integration

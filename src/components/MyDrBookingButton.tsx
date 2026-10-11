@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import ClinicPhone from '@site/src/components/ClinicPhone';
 import { CLINIC } from '@site/src/data/clinic';
 
@@ -31,6 +32,9 @@ type BookingStatus = 'checking' | 'up' | 'down' | 'unknown';
  */
 let statusPromise: Promise<BookingStatus> | null = null;
 function getBookingStatus(token: string): Promise<BookingStatus> {
+  // No token configured (MYDR_WIDGET_TOKEN unset at build time): booking cannot
+  // work, so go straight to the call-reception dialog — never a blank MyDr window.
+  if (!token) return Promise.resolve('down');
   if (!statusPromise) {
     statusPromise = (async (): Promise<BookingStatus> => {
       try {
@@ -155,8 +159,10 @@ function BookingUnavailableDialog({ reason, onClose }: { reason: 'down' | 'loadi
 
 /**
  * MyDrBookingButton – przycisk rezerwacji wizyt w systemie MyDr.
- * Token widgetu (facility_id 26915) jest publiczny z założenia – widget nie
- * działa bez niego w HTML strony. To NIE jest client_secret API MyDr.
+ * Token widgetu (facility_id 26915) trafia do HTML strony z założenia – widget MyDr
+ * czyta go z przeglądarki. To NIE jest client_secret API MyDr. Repo jest publiczne,
+ * więc wartość NIE jest w gicie: pochodzi ze zmiennej Netlify MYDR_WIDGET_TOKEN
+ * (config/mydr-widget-token.mjs → customFields.mydrWidgetToken).
  */
 const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
   label = 'Umów wizytę online',
@@ -168,6 +174,8 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
   evisit = true,
   showFallback = true,
 }) => {
+  const { siteConfig } = useDocusaurusContext();
+  const token = String(siteConfig.customFields?.mydrWidgetToken ?? '');
   const buttonRef = useRef<HTMLButtonElement>(null);
   const openingRef = useRef(false);
   const [status, setStatus] = useState<BookingStatus>('checking');
@@ -182,7 +190,6 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
 
   useEffect(() => {
     let alive = true;
-    const token = buttonRef.current?.dataset.token ?? '';
     getBookingStatus(token).then((s) => {
       if (!alive) return;
       setStatus(s);
@@ -191,7 +198,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
     return () => {
       alive = false;
     };
-  }, []);
+  }, [token]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -231,7 +238,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
       data-visitkind={visitKind}
       data-evisit={evisit ? 'true' : 'false'}
       data-appname="drw"
-      data-token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmYWNpbGl0eV9pZCI6MjY5MTV9.AkNeyST-oY_lzpL9AXCtwaauKJb3AVPFiUU7BxWLH2s"
+      data-token={token}
       onClick={handleClick}
       aria-label={label}
       style={{ cursor: 'pointer' }}

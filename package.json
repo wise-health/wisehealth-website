@@ -13,7 +13,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "test": "python3 scripts/verify-seo.py build && node scripts/test-mydr-status.mjs",
+    "test": "python3 scripts/verify-seo.py build && node scripts/test-mydr-status.mjs && node scripts/test-mydr-widget-token.mjs",
     "prepare": "git rev-parse --git-dir >/dev/null 2>&1 && git config core.hooksPath scripts/hooks || true"
   },
   "dependencies": {

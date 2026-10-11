@@ -25,6 +25,7 @@ Projekt oparty na [Docusaurus 3](https://docusaurus.io/), stworzony z myślą o 
     *   Mikrodane Schema.org (`MedicalClinic`, `Physician`/`Person`, `FAQPage`, `BreadcrumbList`) – dane kliniki z jednego źródła: `src/data/clinic.ts`.
 *   **Integracje**:
     *   Przycisk rezerwacji wizyt (MyDr) + funkcja `/api/mydr-status` – gdy MyDr odrzuca token, pacjent widzi okno „zadzwoń do recepcji” zamiast pustego okna.
+    *   Token widgetu MyDr **nie jest w repozytorium** (repo publiczne): Netlify → zmienna `MYDR_WIDGET_TOKEN`. Build produkcyjny bez niej się nie powiedzie (`config/mydr-widget-token.mjs`). Lokalnie: `MYDR_WIDGET_TOKEN=… npm run build`.
     *   Link „Wyznacz trasę” do Map Google (bez osadzonej mapy – brak cookies Google przed zgodą).
     *   Plausible Analytics (bez cookies), włączane zmienną `PLAUSIBLE_DOMAIN` w Netlify.
 
