@@ -2,6 +2,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import {CLINIC} from './src/data/clinic';
 import type * as Preset from '@docusaurus/preset-classic';
+import {resolveMydrWidgetToken} from './config/mydr-widget-token.mjs';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -107,6 +108,9 @@ const config: Config = {
     // MyDr booking - patients will be directed to MyDr portal where they can find WiseHealth (facility_id: 26915)
     // Note: MyDr widget.js doesn't work (returns 302), using main portal instead
     mydrBookingUrl: process.env.MYDR_BOOKING_URL || 'https://mydr.pl/patient',
+    // MyDr PatientsPlugin data-token — from the Netlify env var MYDR_WIDGET_TOKEN,
+    // never committed (public repo). Validation + fail-closed rules: config/mydr-widget-token.mjs
+    mydrWidgetToken: resolveMydrWidgetToken(),
   },
 
   // Even if you don't use internationalization, you can use this field to set

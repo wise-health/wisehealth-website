@@ -46,6 +46,7 @@ In Netlify deployment settings:
 
 **Environment variables** (click "Add environment variable"):
 - `NODE_VERSION` = `18`
+- `MYDR_WIDGET_TOKEN` = the `data-token` value of the MyDr booking button (MyDr EDM panel → wtyczka dla pacjentów). **Required for production** — the production build fails without it. Never commit it: the repo is public. Rotating it = change the variable + redeploy, no commit.
 - `MYDR_BOOKING_URL` = `[your MyDr booking URL]`
 
 Click **"Deploy site"**
@@ -151,7 +152,7 @@ If something goes wrong:
 
 ### Booking Button Not Working
 
-1. Verify `MYDR_BOOKING_URL` is set in Netlify
+1. Verify `MYDR_WIDGET_TOKEN` and `MYDR_BOOKING_URL` are set in Netlify; `python3 scripts/smoke-prod.py --expect-booking-up` must report `failed: 0`
 2. Check browser console for errors
 3. Test with fallback URL first
 4. Contact MyDr support if URL is incorrect

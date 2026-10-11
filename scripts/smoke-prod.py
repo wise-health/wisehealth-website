@@ -11,6 +11,7 @@ Usage:
   python3 scripts/smoke-prod.py                      # core checks
   python3 scripts/smoke-prod.py --expect-og          # + branded og:image everywhere
   python3 scripts/smoke-prod.py --expect-analytics   # + Plausible script live
+  python3 scripts/smoke-prod.py --expect-booking-up  # + MyDr accepts the deployed widget token
   python3 scripts/smoke-prod.py --base https://deploy-preview-3--<site>.netlify.app
 Exit: 0 = all checks passed, 1 = at least one failure.
 Stdlib only.
@@ -66,6 +67,8 @@ def main() -> int:
     ap.add_argument("--base", default="https://wisehealth.pl")
     ap.add_argument("--expect-og", action="store_true")
     ap.add_argument("--expect-analytics", action="store_true")
+    ap.add_argument("--expect-booking-up", action="store_true",
+                    help="fail unless MyDr accepts the deployed widget token")
     a = ap.parse_args()
     base = a.base.rstrip("/")
 
@@ -107,7 +110,8 @@ def main() -> int:
     st, _, home = fetch(base + "/kontakt")
     tok = re.search(r'data-token="([^"]+)"', home)
     if not tok:
-        check(False, "booking button with data-token on /kontakt")
+        check(False, "booking button with data-token on /kontakt "
+                     "(empty = MYDR_WIDGET_TOKEN not set in Netlify, see config/mydr-widget-token.mjs)")
     else:
         st, _, body = fetch(f"{base}/api/mydr-status?token={tok.group(1)}")
         try:
@@ -119,6 +123,9 @@ def main() -> int:
         # Informational: whether MyDr currently accepts the widget token.
         print(f"  info  MyDr booking currently {'UP' if verdict.get('up') else 'DOWN'} "
               f"(MyDr HTTP {verdict.get('status')}) — DOWN = patients see the call-reception dialog")
+        if a.expect_booking_up:
+            check(verdict.get("up") is True,
+                  f"MyDr accepts the deployed widget token (MyDr HTTP {verdict.get('status')})")
     st, _, _ = fetch(base + "/api/mydr-status?token=not-a-token")
     check(st == 400, f"/api/mydr-status rejects malformed tokens ({st})")
 
