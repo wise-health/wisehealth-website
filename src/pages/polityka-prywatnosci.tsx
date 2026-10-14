@@ -189,6 +189,11 @@ export default function PolitykaPrywatnosciPage(): React.ReactNode {
               </p>
               <ul>
                 <li>
+                  anonimowe statystyki odwiedzin (Umami, na serwerze naszego dostawcy IT w UE) –
+                  bez plików cookies i bez zapisywania adresu IP; liczymy wyświetlenia stron oraz
+                  kliknięcia „Umów wizytę” i numeru telefonu, nie tworzymy profili odwiedzających;
+                </li>
+                <li>
                   <code>wh-notice-dismissed</code> (pamięć lokalna przeglądarki) – zapamiętuje, że
                   zamknięto komunikat informacyjny na dole strony;
                 </li>

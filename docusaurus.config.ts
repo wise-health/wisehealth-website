@@ -1,6 +1,7 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import {CLINIC} from './src/data/clinic';
+import { ANALYTICS } from './src/data/analytics';
 import type * as Preset from '@docusaurus/preset-classic';
 import {resolveMydrWidgetToken} from './config/mydr-widget-token.mjs';
 
@@ -60,32 +61,25 @@ const config: Config = {
   /**
    * Site-wide <head> tags.
    *
-   * ANALYTICS CHOICE — deliberate. We use Plausible, not Google Analytics.
-   * This is a mental-health clinic: pages like /leczenie-depresji-krakow reveal
-   * extremely sensitive information about the visitor. Plausible is cookieless,
-   * stores no personal data and no cross-site identifiers, so:
-   *   1. no consent banner is legally required for it (RODO/GDPR), and
-   *   2. we never build a profile of who read what about their own health.
-   * GA4 would put that data in a third country and require explicit consent,
-   * which most visitors decline — leaving us blind anyway.
+   * ANALYTICS: self-hosted, cookieless Umami — see src/data/analytics.ts for
+   * the why. Loaded on the production deploy only (Netlify sets CONTEXT), so
+   * deploy previews and local builds never pollute the numbers the content
+   * planner learns from.
    *
-   * Both tags are opt-in via environment variables so the repo carries no
-   * account identifiers and local builds stay clean. Set in Netlify UI:
-   *   PLAUSIBLE_DOMAIN            e.g. wisehealth.pl
+   * Google Search Console stays opt-in via environment variable (Netlify UI):
    *   GOOGLE_SITE_VERIFICATION    token from Google Search Console
    */
   headTags: [
-    ...(process.env.PLAUSIBLE_DOMAIN
+    ...(process.env.CONTEXT === 'production' || process.env.WH_FORCE_ANALYTICS === '1'
       ? [
           {
             tagName: 'script',
             attributes: {
               defer: 'true',
-              'data-domain': process.env.PLAUSIBLE_DOMAIN,
-              // tagged-events: counts clicks on elements carrying a
-              // `plausible-event-name=…` class (Booking Click, Phone Click).
-              // outbound-links: counts clicks through to MyDr/Google Maps.
-              src: 'https://plausible.io/js/script.tagged-events.outbound-links.js',
+              src: ANALYTICS.scriptSrc,
+              'data-website-id': ANALYTICS.websiteId,
+              'data-domains': 'wisehealth.pl,www.wisehealth.pl',
+              'data-do-not-track': 'true',
             },
           },
         ]
@@ -274,7 +268,7 @@ const config: Config = {
       copyright: `
         <div>
           WiseHealth · ${CLINIC.address.streetAddress}, ${CLINIC.address.postalCode} ${CLINIC.address.addressLocality}
-          · Recepcja: <a href="tel:${CLINIC.telephone}" class="plausible-event-name=Phone+Click" style="color: inherit; white-space: nowrap;">${CLINIC.telephoneDisplay}</a>
+          · Recepcja: <a href="tel:${CLINIC.telephone}" data-umami-event="Phone Click" style="color: inherit; white-space: nowrap;">${CLINIC.telephoneDisplay}</a>
           (${CLINIC.openingHours.display})
           <br />
           © ${new Date().getFullYear()} WiseHealth. Wszystkie prawa zastrzeżone.

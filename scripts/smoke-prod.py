@@ -10,7 +10,7 @@ analytics and the branded share card.
 Usage:
   python3 scripts/smoke-prod.py                      # core checks
   python3 scripts/smoke-prod.py --expect-og          # + branded og:image everywhere
-  python3 scripts/smoke-prod.py --expect-analytics   # + Plausible script live
+  python3 scripts/smoke-prod.py --expect-analytics   # + analytics (Umami) script live
   python3 scripts/smoke-prod.py --expect-booking-up  # + MyDr accepts the deployed widget token
   python3 scripts/smoke-prod.py --base https://deploy-preview-3--<site>.netlify.app
 Exit: 0 = all checks passed, 1 = at least one failure.
@@ -91,7 +91,7 @@ def main() -> int:
             og = re.search(r'property="og:image"[^>]*content="([^"]+)"|content="([^"]+)"[^>]*property="og:image"', html)
             check(bool(og), f"{path} has og:image")
         if a.expect_analytics:
-            check("plausible.io/js/" in html, f"{path} loads Plausible")
+            check("/wh-insights/insights.js" in html and "data-website-id" in html, f"{path} loads analytics (Umami)")
 
     print("\nclinic entity (served JSON-LD)")
     for path in CLINIC_PAGES:
