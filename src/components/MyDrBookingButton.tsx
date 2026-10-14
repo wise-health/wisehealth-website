@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import ClinicPhone from '@site/src/components/ClinicPhone';
 import { CLINIC } from '@site/src/data/clinic';
+import { track } from '@site/src/data/analytics';
 
 export interface MyDrBookingButtonProps {
   label?: string;
@@ -137,7 +138,8 @@ function BookingUnavailableDialog({ reason, onClose }: { reason: 'down' | 'loadi
             : 'Spróbuj ponownie za chwilę albo umów wizytę telefonicznie:'}
         </p>
         <a
-          className="button button--primary button--lg booking-dialog__call plausible-event-name=Phone+Click"
+          className="button button--primary button--lg booking-dialog__call"
+          data-umami-event="Phone Click"
           href={`tel:${CLINIC.telephone}`}>
           Zadzwoń: {CLINIC.telephoneDisplay}
         </a>
@@ -202,6 +204,9 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    // track() not data-umami-event: MyDr copies every data-* attribute of this
+    // button into its booking URL.
+    track(status === 'down' ? 'Booking Unavailable' : 'Booking Click');
     if (status === 'down') {
       setDialog('down');
       return;
@@ -221,10 +226,6 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
     pp.openModal({ target: e.currentTarget });
   };
 
-  const eventClass = status === 'down'
-    ? 'plausible-event-name=Booking+Unavailable'
-    : 'plausible-event-name=Booking+Click';
-
   return (
     // display:contents keeps layout identical; the status lives here because
     // MyDr copies every data-* attribute of the button into its booking URL.
@@ -232,7 +233,7 @@ const MyDrBookingButton: React.FC<MyDrBookingButtonProps> = ({
     <button
       ref={buttonRef}
       type="button"
-      className={`wh-booking-button ${eventClass} button button--lg ${variantClass} ${className}`.trim()}
+      className={`wh-booking-button button button--lg ${variantClass} ${className}`.trim()}
       data-doctor={doctor}
       data-speciality={speciality}
       data-visitkind={visitKind}

@@ -12,7 +12,7 @@ Sprawdzone bezpośrednio w wynikach wyszukiwania i na żywym serwisie:
 | Obserwacja | Jak zweryfikowano |
 |---|---|
 | WiseHealth nie pojawia się w wynikach dla „poradnia zdrowia psychicznego Kraków” ani „psychiatra Kraków” | zapytania do wyszukiwarki – w top-10 wyłącznie konkurencja (PsychoMedic, MindHealth, PH Zdrowia, Centrum Dobrej Terapii) |
-| Brak jakiejkolwiek analityki | brak `gtag`, `googletagmanager`, `plausible`, `umami`, `hotjar`, `clarity` w kodzie strony |
+| Brak jakiejkolwiek analityki (stan na audyt; od 2026-10-14 Umami, patrz niżej) | brak `gtag`, `googletagmanager`, `plausible`, `umami`, `hotjar`, `clarity` w kodzie strony |
 | Brak weryfikacji Google Search Console | brak metatagu `google-site-verification` |
 | Structured data zawierało puste `"telephone": ""` | JSON-LD na stronie głównej – puste pole unieważnia rich result |
 | Brak numeru telefonu w całym serwisie | `/kontakt`, `/faq`, strona główna – wyłącznie e-mail |
@@ -142,12 +142,12 @@ oceniane przez Google surowiej (YMYL) – i po prostu tak należy.
 - `BreadcrumbList` na podstronach.
 - Puste `telephone` jest pomijane, nie emitowane jako `""`.
 
-### Analityka – Plausible, nie Google Analytics
+### Analityka – Umami (self-hosted), nie Google Analytics
 
 Świadomy wybór. To poradnia zdrowia psychicznego: wejście na
 `/leczenie-depresji-krakow` to dana wrażliwa o osobie odwiedzającej.
-Plausible nie używa cookies, nie zbiera danych osobowych ani identyfikatorów
-międzywitrynowych – dzięki czemu:
+Umami (na serwerze dostawcy IT w UE) nie używa cookies, nie zapisuje adresu IP,
+nie zbiera danych osobowych ani identyfikatorów międzywitrynowych – dzięki czemu:
 
 1. nie wymaga zgody (RODO), więc **dane widzimy od 100% odwiedzających**, a nie
    tylko od tych, którzy kliknęli „Akceptuję”;
@@ -156,16 +156,15 @@ międzywitrynowych – dzięki czemu:
 GA4 wymagałoby zgody (którą większość odrzuca – czyli i tak bylibyśmy ślepi)
 i wysyłałoby te dane do kraju trzeciego.
 
-**Włączenie** – zmienne środowiskowe w panelu Netlify:
+Konfiguracja: `src/data/analytics.ts` (adres skryptu, publiczny `website-id`,
+zdarzenia `Booking Click`, `Booking Unavailable`, `Phone Click`). Skrypt
+ładuje się **tylko na deployu produkcyjnym** (Netlify `CONTEXT=production`),
+więc podglądy i buildy lokalne nie zaśmiecają statystyk; lokalnie można go
+wymusić `WH_FORCE_ANALYTICS=1`. Domena skryptu jest w CSP (`script-src` i
+`connect-src`) w `netlify.toml`. Neutralne nazwy (`/wh-insights/insights.js`,
+`/api/event`), bo blokery reklam wycinają ścieżki z „umami”.
 
-```
-PLAUSIBLE_DOMAIN          = wisehealth.pl
-GOOGLE_SITE_VERIFICATION  = <token z Google Search Console>
-```
-
-Dopóki nie są ustawione, tagi nie są w ogóle emitowane (czyste buildy lokalne).
-`plausible.io` jest już dopisane do CSP w `netlify.toml` – bez tego przeglądarka
-po cichu zablokowałaby skrypt.
+Google Search Console – zmienna `GOOGLE_SITE_VERIFICATION` w Netlify.
 
 ### Higiena techniczna
 
@@ -229,4 +228,4 @@ to `200`, a nie cokolwiek innego.
 4. **Zdjęcia gabinetu** – do GBP i na stronę kontaktu. Przy usłudze opartej
    na zaufaniu realnie wpływają na konwersję.
 5. **Mierzyć rezerwacje, nie ruch** – ruch bez rezerwacji to próżność.
-   Docelowo: zdarzenie w Plausible na kliknięcie „Umów wizytę online”.
+   Mierzone: zdarzenie `Booking Click` w Umami (plus `Phone Click`).
