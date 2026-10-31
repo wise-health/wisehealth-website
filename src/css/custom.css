@@ -1005,6 +1005,38 @@ main table {
   text-align: center;
 }
 
+/* MyDr widget on phones (≤600px): MyDr's own stylesheet (mydr-pp.min.css)
+   sizes the modal and its iframe to 100vh. On iOS 100vh is the toolbar-HIDDEN
+   viewport, so the last ~80px of every step — including the KONTYNUUJ submit
+   on the registration form — sit under the browser bar and cannot be scrolled
+   to (recon 2026-10-31). Resize the wrapper to the dynamic viewport instead.
+   Browsers without dvh ignore these declarations and keep MyDr's 100vh, i.e.
+   exactly today's behaviour. Everything inside the iframe is MyDr's app. */
+@media (max-width: 600px) {
+  .mydr-pp-root,
+  .mydr-pp-modal,
+  .mydr-pp-modal iframe {
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  /* One scroller (the iframe document), no scroll chaining to the page
+     behind the overlay — this is what rubber-bands on iOS. */
+  .mydr-pp-root,
+  .mydr-pp-modal {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  /* MyDr ships a 6vw (~23px) close button — below any tap-target minimum. */
+  .btn-mydr-pp-close {
+    width: 44px;
+    height: 44px;
+    max-width: 44px;
+    max-height: 44px;
+  }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 996px) {
   .wh-services {
